@@ -1,0 +1,17 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "experiments.test_phase2"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_baseline_trajectories_match_native_with_fresh_instances (experiments.test_phase2.Phase2Tests.test_baseline_trajectories_match_native_with_fresh_instances) ... ok\ntest_energy_arm_capacity_and_empty_projector (experiments.test_phase2.Phase2Tests.test_energy_arm_capacity_and_empty_projector) ... ok\ntest_fsal_velocity_verlet_requires_a_matching_force (experiments.test_phase2.Phase2Tests.test_fsal_velocity_verlet_requires_a_matching_force) ... ok\ntest_generic_reservoir_balance_and_nonzero_gate (experiments.test_phase2.Phase2Tests.test_generic_reservoir_balance_and_nonzero_gate) ... ok\ntest_lattice_rounding_and_bitwise_replay (experiments.test_phase2.Phase2Tests.test_lattice_rounding_and_bitwise_replay) ... ok\ntest_mass_jacobian_volume_and_fresh_replay (experiments.test_phase2.Phase2Tests.test_mass_jacobian_volume_and_fresh_replay) ... ok\ntest_synchronized_dkd_matches_fused_staggered_drifts (experiments.test_phase2.Phase2Tests.test_synchronized_dkd_matches_fused_staggered_drifts) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 4.555s\n\nOK\n",
+  "artifact": null
+}

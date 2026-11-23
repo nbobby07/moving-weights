@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "experiments.dense_horizon_phase2",
+    "--artifact-dir",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock",
+    "--lock-sha",
+    "aaa0c8d55729e2be05d9eaf4e9c863a6b55ef261d9104f555ba1dd9d46d8d3e3",
+    "--device",
+    "cpu",
+    "--output",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\dense_cpu.json"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "cpu C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\dense_cpu.json a6b3f364f5e8aa02701a6dadf3949d21d98f0edbb85e4b643db884bfbe1da5d2\n",
+  "stderr": "",
+  "artifact": "dense_cpu.json"
+}

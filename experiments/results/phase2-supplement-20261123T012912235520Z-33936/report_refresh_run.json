@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "experiments.phase2_report",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "artifact": "horizon_rows.csv"
+}

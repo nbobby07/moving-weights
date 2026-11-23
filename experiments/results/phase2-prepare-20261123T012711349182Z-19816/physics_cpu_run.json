@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "eval_v2.run",
+    "physics",
+    "--factory",
+    "mttt.phase2:make_optimizer",
+    "--expected-root",
+    "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "--device",
+    "cpu",
+    "--output",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\physics_cpu.json"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "physics cpu C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\physics_cpu.json ebb101f186dd2cf683ad256c062d3caf725265c38249394e3f0cc8f7dac0c1a5\n",
+  "stderr": "",
+  "artifact": "physics_cpu.json"
+}

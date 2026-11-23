@@ -1,0 +1,37 @@
+{
+  "validation": "artifacts\\sol\\p2\\sol-20261122-cpu-lock\\validation.json",
+  "validation_sha256": "aaa0c8d55729e2be05d9eaf4e9c863a6b55ef261d9104f555ba1dd9d46d8d3e3",
+  "adapter_python_tree_sha256": "5c5c9fc0a68bd4fd68d53214773146c29e09e2bd4ee6df855d87a827a3c41992",
+  "chosen": {
+    "C": {
+      "sgdm": {
+        "h": 0.0036
+      },
+      "adamw": {
+        "h": 0.0025
+      },
+      "ewc": {
+        "h": 0.0144,
+        "strength": 0.5
+      },
+      "mass": {
+        "h": 0.06,
+        "alpha": 8.0
+      },
+      "generic": {
+        "h": 0.06,
+        "alpha": 8.0,
+        "strength": 0.2
+      },
+      "energy": {
+        "h": 0.06,
+        "gamma": 0.03
+      }
+    },
+    "B": {
+      "glide": 0.06,
+      "adamw": 0.005,
+      "threshold": 0.12
+    }
+  }
+}

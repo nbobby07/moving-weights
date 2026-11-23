@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "eval_v2.run",
+    "test",
+    "--factory",
+    "mttt.phase2:make_optimizer",
+    "--expected-root",
+    "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "--device",
+    "cpu",
+    "--output",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\test_cpu.json",
+    "--lock",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\validation.json",
+    "--lock-sha",
+    "aaa0c8d55729e2be05d9eaf4e9c863a6b55ef261d9104f555ba1dd9d46d8d3e3"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "test cpu C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p2\\sol-20261122-cpu-lock\\test_cpu.json ac8f6352a54d718fbd745b8de50dc08b40d4356614566f1e3779c3cc95ab6126\n",
+  "stderr": "",
+  "artifact": "test_cpu.json"
+}

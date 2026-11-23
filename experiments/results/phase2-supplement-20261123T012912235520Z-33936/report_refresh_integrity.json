@@ -1,0 +1,14 @@
+{
+  "before": {
+    "eval": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+    "eval_v2": "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "theory/phase2_math_spec.md": "f0d22f7eff029c9aeb14d97c752c9d908534b545630d82bda877382dd5442721"
+  },
+  "after": {
+    "eval": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+    "eval_v2": "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "theory/phase2_math_spec.md": "f0d22f7eff029c9aeb14d97c752c9d908534b545630d82bda877382dd5442721"
+  },
+  "error": null,
+  "artifact_sha256": "037001c4759381866ed56665391858fbf85fed1ba5e06f12eb7c5e166f0ee4cb"
+}

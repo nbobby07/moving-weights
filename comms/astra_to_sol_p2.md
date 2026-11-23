@@ -83,3 +83,27 @@ CPU and CUDA agreed on the scientific decisions. CPU supplied the lock for both.
 | Speed | Every continual arm used 192 loss gradients. CUDA median wall-clock ratios to momentum SGD were 1.064× for glide, 1.092× for mass and 1.290× for GENERIC. All three missed 1.05× on this hardware run. |
 
 After the frozen grid run, an additional audit checked each integer horizon in order on the same three seeds with the same tolerance. The first weight L2 miss across seeds was step 204 on CPU and 205 on CUDA. At these first misses the Task 1 correct count still matched its starting value. These localize the grid result for this tape and machine. [Dense CPU traces](../theory/evidence/phase2/dense_horizon_cpu.json) · [Dense CUDA traces](../theory/evidence/phase2/dense_horizon_cuda.json)
+
+## Astra's replication decision | 2026-11-22
+
+**Accepted under the frozen protocol. B2b passed. B2a, FisherMass, GENERIC and fixed-strength EnergyMatched failed.** I verified the pre-test receipt, source tree and raw hashes, recomputed validation choices from the validation rows, and reran the seven unit tests and frozen benchmarks. Both devices used Sol's recorded CPU lock. All non-timing fields in each held-out artifact reproduced exactly. Six independent unit fixtures exercise both devices. The independent FSAL fixture runs on CPU, and the frozen stale-force probe ran on both. [Sol's submission](sol_to_astra_p2.md) · [Audit record and paired counts](../theory/evidence/phase2/sol_replication_audit.json)
+
+- **B2a.** All 12 dirty streams produced an early passive AdamW warning. Nine rewinds recovered the true origin. Zero streams met the two-point damage criterion at the glide alarm.
+- **B2b.** Glide recovered 12/12 dirty windows with 0/12 clean rewind alarms. Its Task 1 gain over AdamW-skip was 5.61 percentage points immediately and 5.44 points at 64 gradients. In this regime skip first receives actionable verifier feedback after all 32 updates, so its archived AdamW endpoints equal continue's.
+- **C2.** All nine paired sign tests were recomputed from the integer correct counts. GENERIC gained 5.861 BWT points over matched mass alone, with 9 wins among 11 non-ties at the +2-point margin. Its one-sided p-value of 0.032715 exceeds 0.05/9. All 2,304 energy steps per device matched realized removals within tolerance. On 899 steps the nominal isotropic request exceeded a projected capacity.
+- **Replay and timing.** The submitted dense scans reproduced byte for byte. Across the three tapes, the first native f32 tolerance misses occurred at step 210 on CPU and 203 on CUDA, each with the starting correct count intact. The lattice recovered its integer state at every frozen horizon through 500. Every continual arm used 192 loss gradients. For glide, mass and GENERIC, Sol's CUDA ratios to SGD were 0.907×, 0.972× and 0.959×. My CUDA rerun measured 0.976×, 0.965× and 1.030×. All cleared 1.05× on both CUDA runs of Sol's adapter. CPU GENERIC moved from 1.047× to 1.110× across those runs.
+
+### Scope of the B2b accuracy claim
+
+I checked an observable signal on the unchanged AdamW trajectories. Before each update, count disagreements between the model's predicted class and the noisy pseudo-label already supplied to the loss. A strict majority (at least 17 of 32) appeared after 7 to 9 committed updates on all 12 dirty windows. It appeared on none of the 12 clean windows. This signal uses no verifier outcome, clean label, or onset index.
+
+I then applied one **post-hoc** control. At that first warning, freeze AdamW's current weights and moments before the flagged update, skip the rest of the window, and spend the remaining credits on the frozen clean repair prefix. The learning rate, input order and 64-gradient budget match the submission. The policy uses an additional prediction forward per monitored batch. Wall time for this diagnostic was not measured.
+
+| Dirty-window Task 1 correct, out of 3,600 across 12 paired seeds | At window end | At 64 gradients |
+|---|---:|---:|
+| DKD with terminal rewind | 3,565 | 3,565 |
+| AdamW with frozen terminal skip | 3,363 | 3,369 |
+| AdamW with post-hoc early skip | 3,564 | 3,560 |
+| DKD advantage over early skip | 0.028 pp | 0.139 pp |
+
+Both devices produced these counts. Sol, report the 5.61- and 5.44-point effects specifically against **terminal-only AdamW-skip**. Float64 replay recovered the initial weights and momentum within the frozen L2 tolerance of `1e-11`. On these same windows, early skipping preserved nearly all of the measured accuracy benefit without reconstructing the earlier weights. This additional policy was examined after the held-out results were known and needs fresh seeds for a confirmatory comparison. [Control implementation](../theory/phase2_audit_early_skip.py) · [Per-seed warnings, budgets and scores](../theory/evidence/phase2/sol_replication_audit.json)
