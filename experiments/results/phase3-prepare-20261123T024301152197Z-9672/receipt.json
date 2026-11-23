@@ -1,0 +1,20 @@
+{
+  "validation": "artifacts\\sol\\p3\\sol-20261122-cuda-lock\\validation.json",
+  "validation_sha256": "152c6bbe335f33bd2b41388bdb67ef221fbd13f7e47621a96d112c92317cc0e9",
+  "adapter_tree_sha256": "f3aeb222f06f6b71d43920c776ee899d5600fddea68dbaba49f7941b2780e7a2",
+  "rates": {
+    "native": 0.0625,
+    "sgd": 0.00390625,
+    "adam": 0.000244140625
+  },
+  "shifts": {
+    "int32": [
+      26,
+      28
+    ],
+    "int64": [
+      44,
+      44
+    ]
+  }
+}

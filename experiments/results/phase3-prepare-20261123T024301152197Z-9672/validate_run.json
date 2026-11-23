@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "eval_v3.run",
+    "validate",
+    "--device",
+    "cuda",
+    "--factory",
+    "mttt.phase3:make_engine",
+    "--expected-root",
+    "4cf1e4d5208bba25b42f2a34f92205044e3ccf4804b1512e2c49d5fc2903195d",
+    "--output",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock\\validation.json"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "validate C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock\\validation.json 152c6bbe335f33bd2b41388bdb67ef221fbd13f7e47621a96d112c92317cc0e9\n",
+  "stderr": "",
+  "artifact": "validation.json"
+}

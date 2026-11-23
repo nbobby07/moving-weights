@@ -1,0 +1,17 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "experiments.test_phase3"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_baseline_fresh_states_match_native_pytorch (experiments.test_phase3.Phase3Tests.test_baseline_fresh_states_match_native_pytorch) ... ok\ntest_lattice_checks_increment_sum_and_lossless_encoding (experiments.test_phase3.Phase3Tests.test_lattice_checks_increment_sum_and_lossless_encoding) ... ok\ntest_lattice_rounds_ties_even_and_revisits_identical_midpoints (experiments.test_phase3.Phase3Tests.test_lattice_rounds_ties_even_and_revisits_identical_midpoints) ... ok\ntest_lattice_traverses_blocks_with_global_rounding_diagnostics (experiments.test_phase3.Phase3Tests.test_lattice_traverses_blocks_with_global_rounding_diagnostics) ... ok\ntest_native_force_sites_fresh_engine_and_detachment (experiments.test_phase3.Phase3Tests.test_native_force_sites_fresh_engine_and_detachment) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 2.034s\n\nOK\n",
+  "artifact": null
+}

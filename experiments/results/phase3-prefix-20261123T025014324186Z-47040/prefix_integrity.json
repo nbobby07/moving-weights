@@ -1,0 +1,16 @@
+{
+  "before": {
+    "eval": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+    "eval_v2": "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "eval_v3": "4cf1e4d5208bba25b42f2a34f92205044e3ccf4804b1512e2c49d5fc2903195d",
+    "theory/phase3_math_spec.md": "4e2c227be7ed734e3f6c7c5390494369e87e6d2293f60ce9f9fc547012fb518c"
+  },
+  "after": {
+    "eval": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+    "eval_v2": "19aef02de8768e14dec3f1557130b838f217e0684c6acd8f926e6a87f20270f0",
+    "eval_v3": "4cf1e4d5208bba25b42f2a34f92205044e3ccf4804b1512e2c49d5fc2903195d",
+    "theory/phase3_math_spec.md": "4e2c227be7ed734e3f6c7c5390494369e87e6d2293f60ce9f9fc547012fb518c"
+  },
+  "error": null,
+  "artifact_sha256": "dcbbf14835caea8dbe48117a22ea6debf30034936ef76d9dfad27d5ca165fadc"
+}

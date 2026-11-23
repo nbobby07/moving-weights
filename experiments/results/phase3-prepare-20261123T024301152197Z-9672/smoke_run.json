@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "eval_v3.run",
+    "smoke",
+    "--device",
+    "cpu",
+    "--factory",
+    "mttt.phase3:make_engine",
+    "--expected-root",
+    "4cf1e4d5208bba25b42f2a34f92205044e3ccf4804b1512e2c49d5fc2903195d",
+    "--output",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock\\smoke.json"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "smoke C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock\\smoke.json c4d4c1a6aee4873a4ca436614177714337097872fe1e9ee4dade6bfc570edb5b\n",
+  "stderr": "",
+  "artifact": "smoke.json"
+}

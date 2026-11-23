@@ -1,0 +1,10 @@
+{
+  "sympy": "1.14.0",
+  "checks": {
+    "DKD_symplectic": true,
+    "DKD_reflected_inverse": true,
+    "integer_rational_ties_even": true,
+    "single_submission_bound_and_trie_sizes": true
+  },
+  "exhaustive_lattice_cases": 625
+}

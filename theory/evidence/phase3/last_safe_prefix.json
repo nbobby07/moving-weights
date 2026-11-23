@@ -1,0 +1,90 @@
+{
+  "scope": "Post-hoc boundary localization with the original lock, model, tape and range limits",
+  "physics_sha256": "9b39998220af16db497f10a667323b902f430200127bcaee7a5f3c299f2d1c1a",
+  "formats": {
+    "int32": {
+      "first_rejected": "['long_forward', 57037, 284] drift1 index=3073333 increment=8833834.0 attempted=2154166234.0 limit=2147483647",
+      "last_completed_prefix": {
+        "seed": 57037,
+        "h": 0.0625,
+        "method": "int32",
+        "samples": [
+          {
+            "T": 283,
+            "q_l2": 0.0,
+            "p_l2": 0.0,
+            "relative_error": 0.0,
+            "exact": true,
+            "log_gain": null,
+            "finite_time_rate": null
+          }
+        ],
+        "local_log_stretch": [],
+        "forward_rounding": {
+          "lost_components": 738897771,
+          "nonzero_components": 8095095576,
+          "first_sub_lsb": [
+            [
+              "long_forward",
+              57037,
+              1
+            ],
+            "kick",
+            23845,
+            -0.18490532040596008
+          ],
+          "first_whole_shear_lost": [
+            [
+              "long_forward",
+              57037,
+              30
+            ],
+            "kick"
+          ]
+        }
+      }
+    },
+    "int64": {
+      "first_rejected": "['long_forward', 57037, 278] drift2 index=21735 increment=4826038944104.0 attempted=1128991126730588.0 limit=1125899906842623",
+      "last_completed_prefix": {
+        "seed": 57037,
+        "h": 0.0625,
+        "method": "int64",
+        "samples": [
+          {
+            "T": 277,
+            "q_l2": 0.0,
+            "p_l2": 0.0,
+            "relative_error": 0.0,
+            "exact": true,
+            "log_gain": null,
+            "finite_time_rate": null
+          }
+        ],
+        "local_log_stretch": [],
+        "forward_rounding": {
+          "lost_components": 623674262,
+          "nonzero_components": 7944189982,
+          "first_sub_lsb": [
+            [
+              "long_forward",
+              57037,
+              6
+            ],
+            "kick",
+            1884390,
+            -0.3205273151397705
+          ],
+          "first_whole_shear_lost": [
+            [
+              "long_forward",
+              57037,
+              34
+            ],
+            "kick"
+          ]
+        }
+      }
+    }
+  }
+}

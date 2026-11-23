@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "experiments.phase3_prefix",
+    "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock",
+    "--lock-sha",
+    "152c6bbe335f33bd2b41388bdb67ef221fbd13f7e47621a96d112c92317cc0e9"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "prefix C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\artifacts\\sol\\p3\\sol-20261122-cuda-lock\\prefix.json dcbbf14835caea8dbe48117a22ea6debf30034936ef76d9dfad27d5ca165fadc\n",
+  "stderr": "",
+  "artifact": "prefix.json"
+}
