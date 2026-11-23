@@ -1,0 +1,136 @@
+\section{Reversible updates and retention interventions}
+\label{sec:mechanics}
+
+\subsection{Reflection with a batch tape}
+
+Write the trainable parameters and momenta as \(q,p\in\R^N\).
+For a fixed batch \(b\), let \(U_b(q)\) be its mean loss,
+\(g_b=\nabla U_b\), and \(V=M^{-1}\) for a constant symmetric
+positive-definite mass \(M\). The drift--kick--drift
+(\DKD{}) position-Verlet step is
+\begin{equation}
+ x=q+\tfrac h2 Vp,\qquad p'=p-hg_b(x),\qquad
+ q'=x+\tfrac h2 Vp'.
+ \label{eq:dkd}
+\end{equation}
+It uses a single fresh gradient and returns synchronized \(q'\) and \(p'\).
+From \((q',-p')\), the first drift reaches \(x\). The same force yields
+\(-p\), and the final drift reaches \(q\). Therefore \(S_b^{-1}=R S_b R\)
+with \(R(q,p)=(q,-p)\). Inverting a sequence reflects at its endpoints and
+applies the original batches in reverse order. Replay needs the exact
+realized features, labels, order, and any stochastic choices. Event IDs
+suffice only with an immutable or deterministically regenerable tape.
+
+Each real-arithmetic drift or kick has a shear Jacobian with a symmetric
+off-diagonal block, respectively proportional to \(V\) or to
+\(\nabla^2 U_b\). It preserves the canonical two-form, as does the
+composition. Phase~1 uses the symmetric kick--drift--kick variant with
+two force sites on the same batch. Its final force can be reused at the
+next first kick only if the force law is identical at that point.
+Arbitrary batch changes break that reuse. Phases~2 and~3 use
+\eqref{eq:dkd} to match one-force baselines.
+
+\subsection{Integer shears and a diagnostic for native error}
+
+For unit mass, encode \(q=2^{-s_q}Q\) and \(p=2^{-s_p}P\). With
+round-to-nearest, ties-to-even \(r\), the state updates are
+\begin{align}
+ X &= Q+r\!\left(\tfrac h2\,2^{s_q-s_p}P\right), \\
+ P'&= P+r\!\left(-h\,2^{s_p}g_b(\operatorname{f32}(2^{-s_q}X))\right),\\
+ Q'&= X+r\!\left(\tfrac h2\,2^{s_q-s_p}P'\right).
+ \label{eq:lattice}
+\end{align}
+The decoder gives the model a binary32 midpoint, while integers
+carry the stored endpoints. Multipliers and rounded increments are computed in
+binary64 under the configured bounds. Before any store, both the
+increment and the prospective sum must fit the permitted range.
+Overflow, wrapping, and state rescaling are disallowed. The starting
+state must decode to its original binary32 bits.
+
+On admissible steps, \(r(-a)=-r(a)\) makes each reflected drift undo
+the corresponding forward translation exactly. The identical midpoint
+and batch give the identical binary32 force, so the reflected
+kick also undoes the integer translation. Thus the quantized shears
+give bit-exact round trips on the checked domain. The classical
+symplectic statement applies to the differentiable real-arithmetic
+map in \eqref{eq:dkd}. The lattice proof establishes exact inversion
+of the discrete map. Its forward deviation from the real or native
+binary32 trajectory requires a separate check.
+
+For native arithmetic, let \(r_i\) be the local rounding injection at
+substep \(i\) and \(L_i\) a local Lipschitz bound for the corresponding
+real map. Iterating the one-step error bound gives
+\begin{equation}
+ \|e_m\|\le \|e_0\|\prod_{i=1}^{m}L_i
+  +\sum_{i=1}^{m}\|r_i\|\prod_{j=i+1}^{m}L_j .
+ \label{eq:error}
+\end{equation}
+A tolerance crossing alone therefore says little about the form of
+growth. For the Transformer, we propagate a fixed seeded phase
+direction by the tangent map, evaluating a Hessian--vector product
+at the actual midpoint of each step. We renormalize the direction
+and accumulate log stretch. A centered finite-difference control
+checks that propagation independently. The directional finite-time
+rate measures that perturbation along that tape. Uniform Lipschitz
+bounds and asymptotic Lyapunov exponents require separate evidence.
+In the unit-mass case, the recurrence for perturbation \((u,v)\) is
+\[
+ a=u+\tfrac h2v,\qquad
+ v'=v-h\nabla^2 U_b(x)a,\qquad u'=a+\tfrac h2v' .
+\]
+We compare the recorded cumulative stretch with native replay
+error \(\rho_T=\|(\Delta q,\Delta p)\|_2/
+\max(1,\|(q_0,p_0)\|_2)\). The small-neural protocol uses
+absolute component errors and a separate correct-count criterion.
+
+\subsection{Fisher-guided interventions}
+
+The empirical Fisher diagonal \(f\) averages squared individual
+prior-task score derivatives at the pretrained \(q_*\). The
+lower median, including ties, gives diagonal projectors \(P_L\)
+and \(P_H=I-P_L\). The Phase~1 split brackets the conservative
+update by half steps of \(D_{\tau,G}(q,p)=(q,\exp(-\tau\gamma G)p)\)
+with \(G=I\) or \(G=P_L\). At positive \(\gamma\), inverting
+the damping requires an expanding exponential. Replay uses
+the zero-damping map. A passive scalar reservoir can record
+removed kinetic energy, yielding an energy-degenerate metric
+bracket and nondecreasing reservoir entropy. The projected brake
+leaves the high-Fisher momentum block free to move its corresponding
+position coordinates. This is why
+subspace selectivity does not itself guarantee retention.
+
+Phase~2 separates orientation, inertia, and restoring force.
+An energy-matched coordinator computes requested isotropic
+removal \(D_0\) on its own arm and low- and high-subspace
+capacities \(K_L,K_H\) on their separate trajectories. All arms
+remove \(D=\min(D_0,K_L,K_H)\). For arm projector \(P\) with
+\(K_P=\|Pp\|^2/2>0\), it updates momentum by
+\[
+  p^+=(I-P)p+\sqrt{1-D/K_P}\,Pp .
+\]
+Zero capacity and removal give the identity. The cap preserves
+equal realized removal, while changing the nominal isotropic
+strength whenever a projected arm lacks capacity.
+
+For the Fisher-mass intervention, let \(W\) be the frozen nonnegative
+Fisher diagonal normalized by its mean with a numerical floor.
+Use \(M=I+\alpha W\) in \eqref{eq:dkd}. For the GENERIC
+intervention, add an anchor potential
+\(A(q)=(q-q_*)^\top W(q-q_*)/2\) and passive energy and entropy
+coordinates \(e,\sigma\). In variables
+\((q,p,e,\sigma-A(q))\), the Poisson part is canonical in \(q,p\)
+and leaves the other two coordinates fixed. The symmetric
+positive-semidefinite metric part annihilates
+\(\nabla(U_b+p^\top Vp/2+e)\). It induces
+\(\dot q=-\lambda g W(q-q_*)\), fixes \(p,\sigma\), and
+balances the change in \(U_b\) through \(e\). For duration \(\tau\)
+the anchor solution is
+\[
+ q^+=q_*+\exp(-\tau\lambda g W)(q-q_*),\qquad
+ e^+=e+U_b(q)-U_b(q^+) .
+\]
+Two exact half-anchor flows bracket each Fisher-mass DKD step.
+At gate \(g=0\) this reduces to its conservative mass control.
+The bracket identities concern the continuous flows for one batch.
+The discrete conservative step has its usual energy error, and
+changing batches can supply external work.

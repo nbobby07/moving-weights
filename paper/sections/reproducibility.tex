@@ -1,0 +1,216 @@
+\section{Reproducibility appendix}
+\label{app:reproducibility}
+
+\paragraph{Environment and scope.}
+The archived runs use Python~\PythonVersion{} and PyTorch~\TorchVersion{}. CUDA~\CudaBuild{} runs use one \CudaHardware{}. The CPU reports identify an authentic AMD processor and retain the platform string. The evaluators use deterministic PyTorch algorithms, a fixed cuBLAS workspace configuration, one PyTorch CPU thread, and disabled TF32. Phase~I was rerun on both backends. Phase~II shares the CPU validation receipt across CPU and CUDA and preserves device-specific floating-point results. Phase~III uses a reduced-model CPU smoke plus a full-size CPU force and tangent probe, with CUDA-only calibration and held-out systems measurements. CPU traversal is a mechanics check for Phase~III. The CUDA systems claim uses only the isolated CUDA workers. Timing is recorded separately from deterministic decision fields.
+
+\paragraph{Numerical provenance.}
+\path{paper/scripts/source_pins.json} lists the original SHA-256 pins for all raw inputs. A clean Git checkout can mix evidence files whose original digests require LF and CRLF. The restorer reads Git blobs from \texttt{834128d}, accepts the blob or its CRLF reconstruction only on a byte-hash match, and writes evidence to a separate staging directory. Both generators recheck the staged hashes. \path{paper/scripts/build_tables.py} also checks the validation and test relationships. Macro comments identify the source field or aggregation. The projection in Figure~\ref{fig:scaling} uses the storage equations in the text. The original receipts remain the provenance record.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Evaluator, adapter, and validation digests. The Phase~I adapter digest covers the factory module. The later adapter digests cover the Python package tree.}
+\label{tab:locks}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Item & SHA-256 \\
+\midrule
+Phase I evaluator & {\footnotesize\texttt{\PoneEvalHash}} \\
+Phase I factory module & {\footnotesize\texttt{\PoneAdapterHash}} \\
+Phase II evaluator & {\footnotesize\texttt{\PtwoEvalHash}} \\
+Phase II adapter tree & {\footnotesize\texttt{\PtwoAdapterHash}} \\
+Phase II CPU receipt & {\footnotesize\texttt{\PtwoValidationHash}} \\
+Phase III evaluator & {\footnotesize\texttt{\PthreeEvalHash}} \\
+Phase III adapter tree & {\footnotesize\texttt{\PthreeAdapterHash}} \\
+Phase III CUDA receipt & {\footnotesize\texttt{\PthreeValidationHash}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Selected evidence digests. The source manifest lists the remaining inputs and the Phase~III test manifest lists every raw worker.}
+\label{tab:evidence-hashes}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Item & SHA-256 \\
+\midrule
+Phase I analytic CUDA & {\footnotesize\texttt{\PoneAnalyticHash}} \\
+Phase I continual CUDA & {\footnotesize\texttt{\PoneContinualHash}} \\
+Phase I independent audit & {\footnotesize\texttt{\PoneAuditHash}} \\
+Phase II CPU held-out & {\footnotesize\texttt{\PtwoTestCpuHash}} \\
+Phase II CUDA held-out & {\footnotesize\texttt{\PtwoTestCudaHash}} \\
+Phase II early-skip audit & {\footnotesize\texttt{\PtwoAuditHash}} \\
+Phase III CPU smoke & {\footnotesize\texttt{\PthreeSmokeHash}} \\
+Phase III CUDA test manifest & {\footnotesize\texttt{\PthreeTestHash}} \\
+Phase III last safe prefixes & {\footnotesize\texttt{\PthreePrefixHash}} \\
+Phase III output-head control & {\footnotesize\texttt{\PthreeHeadHash}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Checkouts and lock order.}
+Use a detached checkout at the archived revision in the project repository (\RepoLink{}) for each new run, with \texttt{core.autocrlf=false} set before checkout to preserve the committed source bytes. The Phase~I snapshot is \texttt{9518d3d}, Phase~II is \texttt{e4635c6}, and Phase~III is \texttt{834128d}. Later phases add modules to the same package and consequently change its tree digest. Run each block from the corresponding checkout root and use a fresh output directory. Keep \texttt{-B} on every Python invocation so bytecode files do not alter the evaluator digests. Before each held-out launch, record the newly produced validation artifact digest, source digest, and selections outside the validation file. Repeated calibration can change elapsed-time fields and therefore the file digest. A new run locks its newly recorded receipt. The controls in Appendix~\ref{app:archived-controls} use the restored original receipts. Abort on a nonzero exit code.
+
+\subsection{Phase I: CPU and CUDA}
+\begin{commandblock}
+\begin{verbatim}
+$env:PYTHONPATH = (Resolve-Path src).Path
+$pin = (Get-Content theory/phase1_eval.sha256 -Raw).Trim()
+$fac = 'mttt.optimizers:make_optimizer'
+$out = Join-Path artifacts/sol ([guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $out | Out-Null
+python -B -m unittest discover -s tests -v
+if ($LASTEXITCODE) { throw 'Phase I units failed' }
+foreach ($d in @('cpu','cuda')) {
+  foreach ($name in @('verify_physics','bench_analytic','bench_continual')) {
+    python -B -m "eval.$name" --device $d --factory $fac `
+      --expected-root $pin --output "$out/${name}_$d.json"
+    if ($LASTEXITCODE) { throw "$name failed on $d" }
+  }
+}
+\end{verbatim}
+\end{commandblock}
+
+\subsection{Phase II: CPU validation, paired backends}
+\begin{commandblock}
+\begin{verbatim}
+$env:PYTHONPATH = (Resolve-Path src).Path
+$pin = (Get-Content theory/phase2_eval.sha256 -Raw).Trim()
+$fac = 'mttt.phase2:make_optimizer'
+$out = Join-Path artifacts/sol/p2 ([guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $out | Out-Null
+python -B -m unittest -v experiments.test_phase2
+if ($LASTEXITCODE) { throw 'Phase II units failed' }
+python -B -m eval_v2.run physics --device cpu --factory $fac `
+  --expected-root $pin --output "$out/physics_cpu.json"
+if ($LASTEXITCODE) { throw 'Phase II physics failed' }
+python -B -m eval_v2.run validate --device cpu --factory $fac `
+  --expected-root $pin --output "$out/validation.json"
+if ($LASTEXITCODE) { throw 'Phase II validation failed' }
+$lock = (Get-FileHash "$out/validation.json").Hash.ToLowerInvariant()
+# Record $lock, adapter digest and chosen config before the next block.
+$lock
+\end{verbatim}
+\end{commandblock}
+\begin{commandblock}
+\begin{verbatim}
+foreach ($d in @('cpu','cuda')) {
+  python -B -m eval_v2.run test --device $d --factory $fac `
+    --expected-root $pin --lock "$out/validation.json" `
+    --lock-sha $lock --output "$out/test_$d.json"
+  if ($LASTEXITCODE) { throw "Phase II test failed on $d" }
+}
+foreach ($d in @('cpu','cuda')) {
+  python -B -m experiments.dense_horizon_phase2 --artifact-dir $out `
+    --lock-sha $lock --device $d --output "$out/dense_$d.json"
+  if ($LASTEXITCODE) { throw "Phase II dense audit failed on $d" }
+}
+\end{verbatim}
+\end{commandblock}
+The dense horizon reader verifies both held-out reports before scanning replay prefixes.
+
+\subsection{Phase III: CPU smoke and locked CUDA workers}
+\begin{commandblock}
+\begin{verbatim}
+$env:PYTHONPATH = (Resolve-Path src).Path
+$pin = (Get-Content theory/phase3_eval.sha256 -Raw).Trim()
+$fac = 'mttt.phase3:make_engine'
+$out = Join-Path artifacts/sol/p3 ([guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $out | Out-Null
+python -B -m unittest -v experiments.test_phase3
+if ($LASTEXITCODE) { throw 'Phase III units failed' }
+python -B -m eval_v3.run smoke --device cpu --factory $fac `
+  --expected-root $pin --output "$out/smoke.json"
+if ($LASTEXITCODE) { throw 'Phase III CPU smoke failed' }
+python -B -m eval_v3.run validate --device cuda --factory $fac `
+  --expected-root $pin --output "$out/validation.json"
+if ($LASTEXITCODE) { throw 'Phase III validation failed' }
+$lock = (Get-FileHash "$out/validation.json").Hash.ToLowerInvariant()
+# Record $lock, adapter digest, rates and shifts first.
+$lock
+\end{verbatim}
+\end{commandblock}
+\begin{commandblock}
+\begin{verbatim}
+python -B -m eval_v3.run test --device cuda --factory $fac `
+  --expected-root $pin --lock "$out/validation.json" `
+  --lock-sha $lock --output "$out/test.json"
+if ($LASTEXITCODE) { throw 'Phase III worker failed' }
+python -B -m experiments.phase3_prefix $out --lock-sha $lock
+if ($LASTEXITCODE) { throw 'Phase III prefix audit failed' }
+\end{verbatim}
+\end{commandblock}
+The test command serializes isolated CUDA workers. The manifest records their hashes, while the raw workers retain range failures, complete per-tape error samples, scores, time repeats, and allocator and host peaks. Keep the generated \path{test_parts/} beside \path{test.json}.
+
+\subsection{Exploratory controls on archived held-out tapes}
+\label{app:archived-controls}
+From the manuscript checkout, restore the original evidence into separate roots for the two historical adapters. Extract only the listed source paths. The command-local Git settings preserve the historical source bytes under either checkout setting. Each control runs from its staged root and writes a new output there.
+\begin{commandblock}
+\begin{verbatim}
+$scratch = Join-Path ([IO.Path]::GetTempPath()) ('mttt-' + [guid]::NewGuid())
+New-Item -ItemType Directory -Path $scratch | Out-Null
+$p2 = Join-Path $scratch 'phase2'
+$p3 = Join-Path $scratch 'phase3'
+foreach ($archiveRoot in @($p2,$p3)) {
+  python -B paper/scripts/restore_evidence.py --output $archiveRoot
+  if ($LASTEXITCODE) { throw 'Archive evidence staging failed' }
+}
+git --no-replace-objects -c core.autocrlf=false -c core.eol=lf archive `
+  --format=zip -o "$scratch/p2.zip" e4635c6 eval eval_v2 src/mttt `
+  theory/phase2_audit_early_skip.py
+if ($LASTEXITCODE) { throw 'Phase II source archive failed' }
+git --no-replace-objects -c core.autocrlf=false -c core.eol=lf archive `
+  --format=zip -o "$scratch/p3.zip" 834128d eval_v3 src/mttt `
+  theory/phase3_audit_head_control.py theory/phase3_auc_tie_audit.py `
+  theory/phase3_reference_audit.py
+if ($LASTEXITCODE) { throw 'Phase III source archive failed' }
+Expand-Archive -LiteralPath "$scratch/p2.zip" -DestinationPath $p2
+Expand-Archive -LiteralPath "$scratch/p3.zip" -DestinationPath $p3
+\end{verbatim}
+\end{commandblock}
+\begin{commandblock}
+\begin{verbatim}
+Push-Location $p2
+$env:PYTHONPATH = (Resolve-Path src).Path
+python -B -m theory.phase2_audit_early_skip --device cpu `
+  > early_skip_cpu.json
+if ($LASTEXITCODE) { throw 'CPU early-skip control failed' }
+python -B -m theory.phase2_audit_early_skip --device cuda `
+  > early_skip_cuda.json
+if ($LASTEXITCODE) { throw 'CUDA early-skip control failed' }
+Pop-Location
+
+Push-Location $p3
+$env:PYTHONPATH = (Resolve-Path src).Path
+$archived = 'artifacts/sol/p3/sol-20261122-cuda-lock'
+python -B -m theory.phase3_audit_head_control --output head_control.json
+if ($LASTEXITCODE) { throw 'Head control failed' }
+python -B -m theory.phase3_auc_tie_audit $archived > auc_ties.json
+if ($LASTEXITCODE) { throw 'AUC sensitivity failed' }
+Pop-Location
+\end{verbatim}
+\end{commandblock}
+
+\paragraph{Building the manuscript.}
+Follow \path{paper/README.md} in the project repository (\RepoLink{}) to create a clean detached checkout and unpack the source package. From that checkout root, run the following in PowerShell. The separate staging directory and all recorded pins are the same for either checkout setting.
+\begin{commandblock}
+\begin{verbatim}
+$staged = Join-Path (Split-Path (Get-Location).Path) 'evidence'
+python -B paper/scripts/restore_evidence.py --output $staged
+if ($LASTEXITCODE) { throw 'Evidence staging failed' }
+$env:MTTT_EVIDENCE_ROOT = (Resolve-Path -LiteralPath $staged).Path
+python -B paper/scripts/build_tables.py
+if ($LASTEXITCODE) { throw 'Table generation failed' }
+python -B paper/scripts/build_figures.py
+if ($LASTEXITCODE) { throw 'Figure generation failed' }
+$env:SOURCE_DATE_EPOCH = (git show -s --format=%ct 834128d).Trim()
+Push-Location paper
+tectonic --keep-logs main.tex
+$texExit = $LASTEXITCODE
+Pop-Location
+if ($texExit) { throw 'LaTeX build failed' }
+\end{verbatim}
+\end{commandblock}

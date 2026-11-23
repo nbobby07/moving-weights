@@ -1,0 +1,233 @@
+{
+  "status": "passed",
+  "mode_requested": "true",
+  "source_package_sha256": "54f07da13159e6f57d93e6b870dfdb3b2a8e5e6b14de39cd4b07d690b196adb0",
+  "evidence_revision": "834128d6870fab5dcd2a4c6a39c91d3750632602",
+  "original_manifest_sha256": "d52b5df5f903361eb12e85d039da2f93083d5d58ff5525294f8ae085859834d2",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--no-checkout",
+        "--no-hardlinks",
+        "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+        "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Cloning into 'C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout'...\ndone.\n"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "--local",
+        "core.autocrlf",
+        "true"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "834128d6870fab5dcd2a4c6a39c91d3750632602"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "HEAD is now at 834128d Phase 3 verified: 10.5M Transformer bit-exact int32/int64 tree replay, P3-B/C pass, P3-A range limits & head control\n"
+    },
+    {
+      "argv": [
+        "git",
+        "config",
+        "--local",
+        "--get",
+        "core.autocrlf"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "true\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "834128d6870fab5dcd2a4c6a39c91d3750632602\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "pwsh",
+        "-NoProfile",
+        "-Command",
+        "Expand-Archive -LiteralPath $env:MTTT_AUDIT_PACKAGE -DestinationPath $env:MTTT_AUDIT_CHECKOUT -ErrorAction Stop"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "paper/scripts/build_tables.py"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\scripts\\build_tables.py\", line 621, in <module>\n    main()\n  File \"C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\scripts\\build_tables.py\", line 612, in main\n    verify()\n  File \"C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\scripts\\build_tables.py\", line 63, in verify\n    load(key)\n  File \"C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\scripts\\build_tables.py\", line 49, in load\n    check(sha256(payload).hexdigest() == PINS[key], f\"SHA-256 mismatch: {key}\")\n  File \"C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\scripts\\build_tables.py\", line 30, in check\n    raise ValueError(message)\nValueError: SHA-256 mismatch: artifacts/sol/p2/sol-20261122-cpu-lock/dense_cpu.json\n"
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "paper/scripts/restore_evidence.py",
+        "--output",
+        "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\evidence"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "evidence restoration failed: [WinError 5] Access is denied: 'C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\mttt-evidence-manipr25\\\\evidence' -> 'C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\evidence'\n"
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "paper/scripts/restore_evidence.py",
+        "--output",
+        "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\staged"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "{\n  \"evidence_root\": \"C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\staged\",\n  \"git_commit\": \"834128d6870fab5dcd2a4c6a39c91d3750632602\",\n  \"manifest_sha256\": \"d52b5df5f903361eb12e85d039da2f93083d5d58ff5525294f8ae085859834d2\",\n  \"verified_pins\": 58,\n  \"expected_pins\": 58,\n  \"blob_count\": 44,\n  \"crlf_count\": 14,\n  \"files\": [\n    {\n      \"path\": \"artifacts/sol/analytic.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"a217f410d8dbe37525a95e2ca2510cba463913b35fbf567d91b1a91bc9597360\",\n      \"restored_sha256\": \"49c56d8448ea1de29dac21fdcb4589159c89e2f708e8747d950e83b6653a4517\",\n      \"bytes\": 62314\n    },\n    {\n      \"path\": \"artifacts/sol/continual.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"bbcc4cdc34b080d0a43893a82124fd42032b81c66f1c2481e3e42c6161bb0ec5\",\n      \"restored_sha256\": \"aa1296856bf392102c1514c2302de003e4ec86c22c468b04fea8f5b453a9d3d1\",\n      \"bytes\": 341960\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/dense_cpu.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"a6b3f364f5e8aa02701a6dadf3949d21d98f0edbb85e4b643db884bfbe1da5d2\",\n      \"restored_sha256\": \"a6b3f364f5e8aa02701a6dadf3949d21d98f0edbb85e4b643db884bfbe1da5d2\",\n      \"bytes\": 179798\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/dense_cuda.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"618da1d26e8dac838d935b8c385a64b5b462746669b0d4152976b0aca164c9d8\",\n      \"restored_sha256\": \"618da1d26e8dac838d935b8c385a64b5b462746669b0d4152976b0aca164c9d8\",\n      \"bytes\": 174950\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/physics_cpu.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"ebb101f186dd2cf683ad256c062d3caf725265c38249394e3f0cc8f7dac0c1a5\",\n      \"restored_sha256\": \"ebb101f186dd2cf683ad256c062d3caf725265c38249394e3f0cc8f7dac0c1a5\",\n      \"bytes\": 1692\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/test_cpu.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"ac8f6352a54d718fbd745b8de50dc08b40d4356614566f1e3779c3cc95ab6126\",\n      \"restored_sha256\": \"ac8f6352a54d718fbd745b8de50dc08b40d4356614566f1e3779c3cc95ab6126\",\n      \"bytes\": 625231\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/test_cuda.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"b946d42816f0ca600fe0f6bcbff9db20354a3cfc7a6f97b366d4dacd86c89a7d\",\n      \"restored_sha256\": \"b946d42816f0ca600fe0f6bcbff9db20354a3cfc7a6f97b366d4dacd86c89a7d\",\n      \"bytes\": 640940\n    },\n    {\n      \"path\": \"artifacts/sol/p2/sol-20261122-cpu-lock/validation.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"aaa0c8d55729e2be05d9eaf4e9c863a6b55ef261d9104f555ba1dd9d46d8d3e3\",\n      \"restored_sha256\": \"aaa0c8d55729e2be05d9eaf4e9c863a6b55ef261d9104f555ba1dd9d46d8d3e3\",\n      \"bytes\": 414700\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/prefix.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"dcbbf14835caea8dbe48117a22ea6debf30034936ef76d9dfad27d5ca165fadc\",\n      \"restored_sha256\": \"dcbbf14835caea8dbe48117a22ea6debf30034936ef76d9dfad27d5ca165fadc\",\n      \"bytes\": 4539\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/smoke.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"c4d4c1a6aee4873a4ca436614177714337097872fe1e9ee4dade6bfc570edb5b\",\n      \"restored_sha256\": \"c4d4c1a6aee4873a4ca436614177714337097872fe1e9ee4dade6bfc570edb5b\",\n      \"bytes\": 28569\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"498c76b0359c8b401a2c797985cb5c95e64d48ca03392d59e2c082fc41e7ae14\",\n      \"restored_sha256\": \"498c76b0359c8b401a2c797985cb5c95e64d48ca03392d59e2c082fc41e7ae14\",\n      \"bytes\": 38779\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_cpu_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"b1ca42dcf7d3a437250697e455c3d2ec58b6d9e7b58573cb6bcf887e91b4df6b\",\n      \"restored_sha256\": \"b1ca42dcf7d3a437250697e455c3d2ec58b6d9e7b58573cb6bcf887e91b4df6b\",\n      \"bytes\": 6255\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_cpu_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"42ac6f543e60515dc5f2fe717839eae67409ee44f84b7278b1109bbd1416243b\",\n      \"restored_sha256\": \"42ac6f543e60515dc5f2fe717839eae67409ee44f84b7278b1109bbd1416243b\",\n      \"bytes\": 8924\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_cpu_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"bc0a0bf2ddcea1c50a196a6cfbc3559e589b56a26c94cd2f834bb7651c549fb9\",\n      \"restored_sha256\": \"bc0a0bf2ddcea1c50a196a6cfbc3559e589b56a26c94cd2f834bb7651c549fb9\",\n      \"bytes\": 16818\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_cpu_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"db4eafbd0528a06730226cdb74af7cfbfa76a176d382c3781232fcff2dde3f17\",\n      \"restored_sha256\": \"db4eafbd0528a06730226cdb74af7cfbfa76a176d382c3781232fcff2dde3f17\",\n      \"bytes\": 42946\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_gpu_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"c83ec9720c76778eab7316d4b32093021ac3dbf07e7a4144d6449f9be10f27b2\",\n      \"restored_sha256\": \"c83ec9720c76778eab7316d4b32093021ac3dbf07e7a4144d6449f9be10f27b2\",\n      \"bytes\": 6180\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_gpu_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"f3d941e5462ca86afb2f0d2597641d2f948b1592255b74b86a8dc92e8813b8b7\",\n      \"restored_sha256\": \"f3d941e5462ca86afb2f0d2597641d2f948b1592255b74b86a8dc92e8813b8b7\",\n      \"bytes\": 8852\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_gpu_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"291240b2763315745571af4a854cfbf488a1d213c219d268b3af6f1dcdd0e25a\",\n      \"restored_sha256\": \"291240b2763315745571af4a854cfbf488a1d213c219d268b3af6f1dcdd0e25a\",\n      \"bytes\": 16749\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/adam_gpu_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"01d0879a5b6d7dfb70fc7d4f57d2adc5e2be3c15d62a7c8e00d4bc29ff2726c2\",\n      \"restored_sha256\": \"01d0879a5b6d7dfb70fc7d4f57d2adc5e2be3c15d62a7c8e00d4bc29ff2726c2\",\n      \"bytes\": 42884\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int32_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"b2c82ac2c7997952ccb8d5ecd9666f384d97d595040160f29806a98abb767c13\",\n      \"restored_sha256\": \"b2c82ac2c7997952ccb8d5ecd9666f384d97d595040160f29806a98abb767c13\",\n      \"bytes\": 6930\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int32_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"1de40184c63e6217980c0aad1806f06c1c6a3f24140236a93df845601a1179c2\",\n      \"restored_sha256\": \"1de40184c63e6217980c0aad1806f06c1c6a3f24140236a93df845601a1179c2\",\n      \"bytes\": 9874\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int32_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"2da718254a858c6cefc7483df42979f2267ac5f0ab27204446ae9f2fba236d76\",\n      \"restored_sha256\": \"2da718254a858c6cefc7483df42979f2267ac5f0ab27204446ae9f2fba236d76\",\n      \"bytes\": 18723\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int32_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"ba3cf031968c859998becbf789e96f94333dca0ae809283d1465bd563bf083d2\",\n      \"restored_sha256\": \"ba3cf031968c859998becbf789e96f94333dca0ae809283d1465bd563bf083d2\",\n      \"bytes\": 48552\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int64_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"616ccfe6d611f37df9a2d20eeb5900f2afa30c00a5bd1a058da41187ed925cad\",\n      \"restored_sha256\": \"616ccfe6d611f37df9a2d20eeb5900f2afa30c00a5bd1a058da41187ed925cad\",\n      \"bytes\": 6917\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int64_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"96238857ec8cbd0d97fff9794a3be3accbf471d8a0b3679fdd2a9fdd8f87ac0e\",\n      \"restored_sha256\": \"96238857ec8cbd0d97fff9794a3be3accbf471d8a0b3679fdd2a9fdd8f87ac0e\",\n      \"bytes\": 9862\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int64_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"fb47331c08805e6b9a7de3fa334c9ed06641e1523f192b970dd8ce1d057d84c0\",\n      \"restored_sha256\": \"fb47331c08805e6b9a7de3fa334c9ed06641e1523f192b970dd8ce1d057d84c0\",\n      \"bytes\": 18733\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/int64_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"34ddfb26a1e7da68a458df2dcbf8e24a7b07b90006af9314dc74cd83a5e3c207\",\n      \"restored_sha256\": \"34ddfb26a1e7da68a458df2dcbf8e24a7b07b90006af9314dc74cd83a5e3c207\",\n      \"bytes\": 48601\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/native_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"7d13a8c2d2afc2104b31a801b91563efdddb0622697a285222c1f08100408918\",\n      \"restored_sha256\": \"7d13a8c2d2afc2104b31a801b91563efdddb0622697a285222c1f08100408918\",\n      \"bytes\": 6804\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/native_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"88ab8c37e0a2c4ae5f285d60e4531d59981c4e6ddc48e4a68b2bcb945528f7a6\",\n      \"restored_sha256\": \"88ab8c37e0a2c4ae5f285d60e4531d59981c4e6ddc48e4a68b2bcb945528f7a6\",\n      \"bytes\": 10101\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/native_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"8385d32df371a61c195d7ce90bae68cb80b05b447699f28f5636d612bde31a4f\",\n      \"restored_sha256\": \"8385d32df371a61c195d7ce90bae68cb80b05b447699f28f5636d612bde31a4f\",\n      \"bytes\": 20007\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/native_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"3f86824021edf0984c0881a0a255825dca2a759f3b6e42e083af8e5db8a1dd7a\",\n      \"restored_sha256\": \"3f86824021edf0984c0881a0a255825dca2a759f3b6e42e083af8e5db8a1dd7a\",\n      \"bytes\": 53350\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/physics.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"dde0813a74fcaea43782a163c89d4344533408de6ab3f360f230e323bd0285d5\",\n      \"restored_sha256\": \"dde0813a74fcaea43782a163c89d4344533408de6ab3f360f230e323bd0285d5\",\n      \"bytes\": 74836\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_cpu_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"a5fb9ca105d3167e8ba2b06d51eaf257501c4728569491874f6e4177d61077aa\",\n      \"restored_sha256\": \"a5fb9ca105d3167e8ba2b06d51eaf257501c4728569491874f6e4177d61077aa\",\n      \"bytes\": 6282\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_cpu_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"b4e31521717eaaff6eda21d4096449bc27eeb434fe5d82ce2c39f93b7d68d3c5\",\n      \"restored_sha256\": \"b4e31521717eaaff6eda21d4096449bc27eeb434fe5d82ce2c39f93b7d68d3c5\",\n      \"bytes\": 8983\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_cpu_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"aa4f31b3f085e5ddf3bbe3b6a20b9668811bc4a155ff58823962bc6851141532\",\n      \"restored_sha256\": \"aa4f31b3f085e5ddf3bbe3b6a20b9668811bc4a155ff58823962bc6851141532\",\n      \"bytes\": 17074\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_cpu_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"0ed922e893368d5289ebae02361c45baa3568a7684170bd9eaefcb3b98876030\",\n      \"restored_sha256\": \"0ed922e893368d5289ebae02361c45baa3568a7684170bd9eaefcb3b98876030\",\n      \"bytes\": 43873\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_gpu_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"be5ab2116038d694d665d5824a6b331986da0ee38b3cb66822823fcba2444e59\",\n      \"restored_sha256\": \"be5ab2116038d694d665d5824a6b331986da0ee38b3cb66822823fcba2444e59\",\n      \"bytes\": 6207\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_gpu_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"d6688d6dab5d39e7593fb790e4a935812f3048704f7dc70c906ad6f01807af5b\",\n      \"restored_sha256\": \"d6688d6dab5d39e7593fb790e4a935812f3048704f7dc70c906ad6f01807af5b\",\n      \"bytes\": 8907\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_gpu_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"69194d9f699ad35f75d9038f739bc3fd518b11fb3aaefbce5a27abcb1abfa92f\",\n      \"restored_sha256\": \"69194d9f699ad35f75d9038f739bc3fd518b11fb3aaefbce5a27abcb1abfa92f\",\n      \"bytes\": 17007\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/sgd_gpu_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"379951de1dd0e4e108cc6b9345dee4033ac948cef30df49310cf257fef464849\",\n      \"restored_sha256\": \"379951de1dd0e4e108cc6b9345dee4033ac948cef30df49310cf257fef464849\",\n      \"bytes\": 43800\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/single_1.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"ff703bbac3351f5dc33cc06fa7bcd618026ba4fe56b98258948ecd5b56e2d538\",\n      \"restored_sha256\": \"ff703bbac3351f5dc33cc06fa7bcd618026ba4fe56b98258948ecd5b56e2d538\",\n      \"bytes\": 4811\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/single_2.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"73286992dfafb6bd693d9e5f668ffaaa7330e7ab68cce17eccf94f19dc5ae0e6\",\n      \"restored_sha256\": \"73286992dfafb6bd693d9e5f668ffaaa7330e7ab68cce17eccf94f19dc5ae0e6\",\n      \"bytes\": 5265\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/single_4.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"532218a04e1aaf80a30ecf4d0091416250d2ad0df98cdd2ab65fbf8a0a10979b\",\n      \"restored_sha256\": \"532218a04e1aaf80a30ecf4d0091416250d2ad0df98cdd2ab65fbf8a0a10979b\",\n      \"bytes\": 6187\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/test_parts/single_8.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"1ff06bd89236cabe28394d39e72739bd6cb3dee7759f524e736b576870e49b64\",\n      \"restored_sha256\": \"1ff06bd89236cabe28394d39e72739bd6cb3dee7759f524e736b576870e49b64\",\n      \"bytes\": 8010\n    },\n    {\n      \"path\": \"artifacts/sol/p3/sol-20261122-cuda-lock/validation.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"152c6bbe335f33bd2b41388bdb67ef221fbd13f7e47621a96d112c92317cc0e9\",\n      \"restored_sha256\": \"152c6bbe335f33bd2b41388bdb67ef221fbd13f7e47621a96d112c92317cc0e9\",\n      \"bytes\": 64636\n    },\n    {\n      \"path\": \"artifacts/sol/physics.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"ff7083efa0c452a6a747db904c8cbde956362d719251e0eb9f347728d03d3760\",\n      \"restored_sha256\": \"9ccad9174d28f79e432bd6b0443504658ae4b8659bb7a97641fe4d1d61bc8720\",\n      \"bytes\": 3842\n    },\n    {\n      \"path\": \"experiments/results/frozen-auto-20261122T234857753096Z-14848/analytic.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"a217f410d8dbe37525a95e2ca2510cba463913b35fbf567d91b1a91bc9597360\",\n      \"restored_sha256\": \"49c56d8448ea1de29dac21fdcb4589159c89e2f708e8747d950e83b6653a4517\",\n      \"bytes\": 62314\n    },\n    {\n      \"path\": \"experiments/results/frozen-auto-20261122T234857753096Z-14848/continual.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"bbcc4cdc34b080d0a43893a82124fd42032b81c66f1c2481e3e42c6161bb0ec5\",\n      \"restored_sha256\": \"aa1296856bf392102c1514c2302de003e4ec86c22c468b04fea8f5b453a9d3d1\",\n      \"bytes\": 341960\n    },\n    {\n      \"path\": \"experiments/results/frozen-auto-20261122T234857753096Z-14848/physics.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"ff7083efa0c452a6a747db904c8cbde956362d719251e0eb9f347728d03d3760\",\n      \"restored_sha256\": \"9ccad9174d28f79e432bd6b0443504658ae4b8659bb7a97641fe4d1d61bc8720\",\n      \"bytes\": 3842\n    },\n    {\n      \"path\": \"experiments/results/frozen-cpu-20261122T234819937253Z-41300/analytic.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"20c6d56b6fc869326325e201fd84f88d41909df2470e369e22cd77953fb04d0d\",\n      \"restored_sha256\": \"80cac8469f7105404224ac9f5b25200cb667cef1403d35a208566c598d22b998\",\n      \"bytes\": 62339\n    },\n    {\n      \"path\": \"experiments/results/frozen-cpu-20261122T234819937253Z-41300/continual.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"233047d86070a783d6c096f4d140bfa1b5f999cc48bab7e4d1203ead2e5955d7\",\n      \"restored_sha256\": \"b25c6aecc531981a6b3a81680d812bdb7ca46faeb1273ab55b6be8b2d8441138\",\n      \"bytes\": 335390\n    },\n    {\n      \"path\": \"experiments/results/frozen-cpu-20261122T234819937253Z-41300/physics.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"f2745b5ebb55e5068e41ae1a5c84eb9f37b28e85da22e0f28bff2bb33802eb5d\",\n      \"restored_sha256\": \"deeaece9a4cb371116491ba759ece44300d3fd23a0d6d7b827cd5e0bb619db76\",\n      \"bytes\": 3870\n    },\n    {\n      \"path\": \"experiments/results/phase2-prepare-20261123T012711349182Z-19816/receipt.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"c0d1d976eb815caf9782c2fb1c8381ba232ae38a491c562a97a78f2caf762fc7\",\n      \"restored_sha256\": \"998e41c3687a76a2c16969357176c56ab506f597cc4fd13981db9748617ffc7f\",\n      \"bytes\": 815\n    },\n    {\n      \"path\": \"experiments/results/phase3-prepare-20261123T024301152197Z-9672/receipt.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"f0b9dd127749acf9277af328f74d172e01c916d4b01d66125427ac280f651ff4\",\n      \"restored_sha256\": \"ccb3b51cbe006bde718b5ee43fafd30846e5c14b762c86d711ae714175a7a287\",\n      \"bytes\": 476\n    },\n    {\n      \"path\": \"theory/evidence/phase1_replication_audit.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"862df7e549b6e038673a540b9be5a085076e1db90b6490dd9b1e62d2f526e41e\",\n      \"restored_sha256\": \"88da20143a316f75e451b9cd89040e4d1fb93712161977c963cc386ce37ac8cc\",\n      \"bytes\": 11952\n    },\n    {\n      \"path\": \"theory/evidence/phase2/sol_replication_audit.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"20411a83fdbf90a9e14723848f4df920a6b8909bdbd7c02e6250754ad4439791\",\n      \"restored_sha256\": \"c85474755948d44c6c56d63e3a64c6f12056c757aeaf88040d97c0cbd3428649\",\n      \"bytes\": 71208\n    },\n    {\n      \"path\": \"theory/evidence/phase3/sol_head_control.json\",\n      \"method\": \"blob\",\n      \"blob_sha256\": \"c34661c9aa63b616a4c51a8558088707633f186beed9b3406e233b3efba4dee6\",\n      \"restored_sha256\": \"c34661c9aa63b616a4c51a8558088707633f186beed9b3406e233b3efba4dee6\",\n      \"bytes\": 43711\n    },\n    {\n      \"path\": \"theory/evidence/phase3/sol_replication_audit.json\",\n      \"method\": \"crlf\",\n      \"blob_sha256\": \"7d5c4b1e3567adfd8dcfa2b870fe9e78599a5f5b5f4cfbc9f2fb0b410e7c09d1\",\n      \"restored_sha256\": \"c98595d4824831989610ead646d738cdd3beac64fb9a561655807539c4a2afc2\",\n      \"bytes\": 73952\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "paper/scripts/build_tables.py"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "Verified 58 source artifacts. Wrote 140 macros and 6 tables.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "paper/scripts/build_figures.py"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\figures\\fig1_precision_horizon\nC:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\figures\\fig2_continual_falsification\nC:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\figures\\fig3_systems_pareto\nC:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper\\figures\\fig4_scale_crossover\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "-s",
+        "--format=%ct",
+        "834128d"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "1795404479\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "tectonic",
+        "--keep-logs",
+        "main.tex"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout\\paper",
+      "exit": 0,
+      "stdout": "note: Running TeX ...\nnote: Running BibTeX on main.aux ...\nnote: Rerunning TeX because bibtex was run ...\nnote: Rerunning TeX because \"main.aux\" changed ...\nnote: Running xdvipdfmx ...\nnote: Writing `main.blg` (194 B)\nnote: Writing `main.pdf` (266.654296875 KiB)\nnote: Writing `main.log` (20.7470703125 KiB)\nnote: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--",
+        "eval",
+        "eval_v2",
+        "eval_v3",
+        "theory",
+        "src",
+        "artifacts"
+      ],
+      "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true\\checkout",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "scratch": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\paper\\.build\\caption-release-8446a12b\\true",
+  "input_policy": "Independent Git clone and the published source ZIP. Compiler cache supplies TeX resources only.",
+  "actual_autocrlf": "true",
+  "actual_revision": "834128d6870fab5dcd2a4c6a39c91d3750632602",
+  "manifest_from_package_sha256": "d52b5df5f903361eb12e85d039da2f93083d5d58ff5525294f8ae085859834d2",
+  "unstaged_checkout_pin_matches": 15,
+  "without_staging_gate": "correctly rejected original checkout bytes before generating output",
+  "initial_staging_failure": "Traceback (most recent call last):\n  File \"<stdin>\", line 86, in validate\n  File \"<stdin>\", line 61, in run\nRuntimeError: failed: ['python', '-B', 'paper/scripts/restore_evidence.py', '--output', 'C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\evidence']: evidence restoration failed: [WinError 5] Access is denied: 'C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\mttt-evidence-manipr25\\\\evidence' -> 'C:\\\\Users\\\\Noel\\\\Documents\\\\ChatGPT\\\\moving-weights\\\\paper\\\\.build\\\\caption-release-8446a12b\\\\true\\\\evidence'\n",
+  "staged_verified_pin_matches": 58,
+  "source_date_epoch": "1795404479",
+  "tex_log_findings": [],
+  "generated_sha256": {
+    "paper/main.pdf": "dc200185ff058d1a68ea735bd315bf94cb2c60fb0fb291621ca5909b125f9b3c",
+    "paper/macros_verified.tex": "b756ead9da8a787f00f1f3e7e2da5706b4c880e3b247a36dcb0f7e48fbecc1a6",
+    "paper/tables/branching.tex": "01484123401dac2926282ed73ca609ea51f35f54e774b76c6527263343949755",
+    "paper/tables/phaseone.tex": "63623d4dcb3a1824b0fdcffc469c8530ea72f9d4f6955496030744328134bfe1",
+    "paper/tables/recovery.tex": "7cbf9e7b64734124ef9afa55d162a555870d5e2c469096d355199cd87b23e821",
+    "paper/tables/retention.tex": "d477d22e1c6552f56a72595742591a6bb4a164e2796344ee99ca22d664207c34",
+    "paper/tables/systems.tex": "4779f593cfd9c3a1d209313d5d26871226648ce007bbfb9dc7dec19d1ee1e313",
+    "paper/tables/transformer.tex": "ce0e7e5750e339906d29d87291cb778a88f4e85bd19c7f3516caf0e7d232cc7d",
+    "paper/figures/fig1_precision_horizon.pdf": "723eda9cfedaffab25b65f5803752148e5d8350275445098927de51510fc1985",
+    "paper/figures/fig1_precision_horizon.png": "5ea7640264ec850ef1234175118fd4e05ac82453d72efed54efa6635503f7f19",
+    "paper/figures/fig2_continual_falsification.pdf": "281ffa15bac6b19a99f9d5c831f1bc9f98c465e0046a6232a13bd7d7c91b089e",
+    "paper/figures/fig2_continual_falsification.png": "e406f3708551e3207a7ed6e3bcab3b9dd990895c95bd96b389cd73650aa8d119",
+    "paper/figures/fig3_systems_pareto.pdf": "bbd3a122d90b176bb0c12b27a09d53543720cf79d5826641071d73a690ee2dfd",
+    "paper/figures/fig3_systems_pareto.png": "6c718738c3fe0bb683fec0b6f7468d315d18f49bc443727be354cac50be56073",
+    "paper/figures/fig4_scale_crossover.pdf": "03711bd6d24bd65daf89e56227e4be605f9c7f068ae08fc61ce107ecf6d29bfc",
+    "paper/figures/fig4_scale_crossover.png": "f78c6d0a89f2b08e06f1a295c86e7965c27d9e6508abe1fb51451e828d462885"
+  },
+  "changed_generated_files": [
+    "paper/main.pdf"
+  ],
+  "pdf_title": "When Does Reversible Test-Time Training Pay Off? Bit-Exact Lattice Replay, Precision Horizons, and Checkpointing Tradeoffs",
+  "pdf_pages": 16,
+  "verified_table_2_sentence": "Clean alarm counts are reported separately for each policy over 12 clean windows per regime.",
+  "initial_teX_log_scan": "A broad pattern matched the infwarerr package description; an anchored diagnostic scan found no TeX warnings."
+}

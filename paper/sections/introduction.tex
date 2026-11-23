@@ -1,0 +1,43 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Test-time training can commit a parameter update before downstream
+feedback tells us whether the update helped. When that feedback calls for
+going back, the system needs both the earlier parameters and the optimizer
+buffers. A full checkpoint makes restoration a copy operation, while a
+reversible update can reconstruct the state from a tape of event
+identifiers by recomputing gradients. The tradeoff depends on how much
+state would need to be saved and how often the policy would need it back.
+
+We study that tradeoff in analytic and small neural probes, then in a
+controlled branching task with a causal Transformer. The experiments
+separate the accuracy of reconstructing an optimizer state from the
+effect of using it. They also test whether geometric priors preserve
+prior-task accuracy across a continual stream.
+
+In real arithmetic, we can run the same positive-step position-Verlet
+update backward by reflecting momentum and reversing the batch order.
+Its checked fixed-point counterpart restores integer endpoints bit for bit,
+using one fresh gradient per step, as long as it remains in range.
+Exact inversion preserves the rounded map, including kicks that round to
+zero. Native floating-point replay has a different limitation. On the long
+Transformer tape, its error need not grow according to the pre-specified
+exponential model.
+
+Feedback timing determines when reconstruction helps. A decision made
+only after a window of speculative updates can leave earlier bad updates
+in place, even if the policy stops at the alarm. When a warning is
+available sooner, an exploratory comparison finds that skipping nearly
+matches rewind in accuracy on the same tapes. The retention experiments
+show a separate limit. Dissipating kinetic energy or contracting
+displacements toward an anchor does not by itself preserve an old
+task's accuracy.
+
+In full-model search, replay lowers peak device allocation compared with
+resident dense checkpoints. Pinned-host SGD is faster at the
+matched deep-search solve rate, and an exploratory head-only control
+shows how much the amount of trainable state matters. We report those
+measurements separately from an analytical model of storage at larger
+scales. The project repository is \RepoLink{}. Appendix~\ref{app:reproducibility}
+identifies the build README and the archived revisions used to reproduce
+the results.

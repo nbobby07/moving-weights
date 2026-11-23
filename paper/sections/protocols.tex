@@ -1,0 +1,88 @@
+\section{Experimental design}
+\label{sec:protocols}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}l
+  >{\raggedright\arraybackslash}p{0.22\textwidth}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+  >{\raggedright\arraybackslash}X@{}}
+\toprule
+Stage & Model \& parameter count & Core questions & Pre-specified outcome \\
+\midrule
+Phase~1 & Coupled double well and shared-head MLP (\PoneDimensions{} parameters) &
+Native replay, energy, known-boundary recovery, and continual retention &
+Numerical gates and finite-horizon recovery passed. Retention failed. \\
+\addlinespace
+Phase~2 & Shared-head MLP (\PoneDimensions{} parameters) &
+Replay precision, delayed feedback, and Fisher-based retention &
+Integer replay passed on the tested grid. Terminal recovery passed, but ramped recovery and retention failed. \\
+\addlinespace
+Phase~3 & Causal Transformer (\PthreeParams{} parameters) &
+Lattice inversion, search under terminal feedback, and checkpoint costs &
+The combined precision claim failed despite exact tree replay. Search and the systems criteria passed. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For each confirmatory stage, we fixed the data generator, comparisons,
+outcomes, and decision rules before examining held-out results. Separate
+adapter implementations used the same evaluators. Where we tuned
+settings, validation and test seeds were disjoint, and we locked the
+adapter with its validation receipt before the held-out run. A seed
+defines one model and dataset, so rerunning it on another backend checks
+reproducibility of the same replicate. Appendix~\ref{app:reproducibility}
+lists the underlying artifacts and commands.
+
+\paragraph{Analytic and neural precision.}
+We measured energy error across step sizes in the Phase~1 double well
+with the potential held fixed. A separate tilted tape tested momentum
+reflection and reverse event order under changing forces, as did the
+neural tape on a shared-head multilayer perceptron (MLP). In Phase~2
+we compared native binary32 endpoints with a fixed-point control on
+a pre-specified replay grid. We ran a separate dense scan to locate the
+first tolerance miss between grid points.
+
+\paragraph{Feedback and retention.}
+The learning tasks classify procedural clusters whose centers and
+context change between tasks. The poison and retention experiments
+start from the same first-task pretraining state and run on separate
+branches. In recovery, the protocol specifies when a policy gets
+feedback, how far it can rewind, and when the scoring data are used.
+In retention, all methods carry their state across tasks and train
+without replaying batches from earlier tasks. If \(a_{i,j}\) is accuracy
+on task \(j\) after training through task \(i\), we measure retention
+as \(\BWT=a_{J,1}-a_{1,1}\) at the last task \(J\), and live accuracy
+as the mean of \(a_{j,j}\) on the new tasks. We pair BWT contrasts
+by test seed. The pre-specified sign tests compare each contrast with a
+positive superiority margin and exclude ties at that margin, computed
+on the integer correct-count scale.
+
+Phase~1 matches arriving minibatches at fixed rates. In Phases~2
+and~3 we count fresh data gradients and charge separately for each replay
+gradient. The Phase~2 retention settings come from validation, and all
+methods share a continual gradient budget. In recovery, policies spend
+any remaining credits on the same ordered stream of clean repair
+batches. Per-batch scoring and data transfers add work outside the
+gradient count.
+
+\paragraph{Speculative search.}
+In Phase~3 we train all \PthreeParams{} parameters of the Transformer
+in the full-model runs. Each procedural problem has \(D\) public
+addresses with default continuation bits. The private rule is drawn
+uniformly from the default and its \(D\) single-address exceptions.
+Training examples are clean conditional on the proposed rule. Search
+follows a fixed depth-first trie, while the verifier keeps the private
+rule and checks held-out model predictions. Since the policy responds
+to a verifier outcome only by stopping at success, a single exhaustive
+traversal provides the leaf predictions and stopping prefixes for every
+possible private rule.
+
+Reversible methods save ordered event IDs and rewind the relevant
+suffixes. Checkpoint methods restore weights and optimizer state at
+unresolved forks from GPU buffers or pinned host memory. The single-path
+control submits the first native leaf to the verifier once. In separate
+correctness traversals we save parent snapshots to check every unwound
+edge. For timings we omit those snapshots, run each method and depth in
+a fresh CUDA process, and synchronize the device for block timers. We
+measure peak allocation in those processes.

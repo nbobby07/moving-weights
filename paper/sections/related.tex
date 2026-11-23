@@ -1,0 +1,48 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Geometric integration and discrete reversal.}
+St\"ormer--Verlet composes drift and kick subflows to integrate separable
+Hamiltonians symmetrically and symplectically
+\citep{verlet1967,hairer2006geometric}. Backward error analysis explains
+Verlet's oscillatory energy error in suitable regimes. The resulting
+modified Hamiltonian gives us an additional check on the short analytic
+trajectories \citep{hairer2009energy}. JANUS obtains exact reversal in
+gravitational integration using integer shears and deterministic
+floating-point forces \citep{rein2018janus}. We use the same construction
+for optimizer state, where a changing minibatch gives each step its own
+potential.
+
+\paragraph{Reversible networks and test-time updates.}
+RevNets reconstruct activations to run the backward pass with fewer saved
+intermediates, while Momentum ResNets use second-order reversible dynamics
+across network layers \citep{gomez2017reversible,saulerichard2021momentum}.
+We reconstruct state across \emph{optimizer steps}, so a comparison can
+ask whether it helps to undo test-time parameter changes. Reversing
+momentum updates has also been used to differentiate through training for
+hyperparameter optimization, by preserving the information discarded
+by contraction \citep{maclaurin2015reversible}. We use conservative
+dynamics to restore state during search and apply the JANUS integer
+shears with neural gradients.
+
+Test-time training adapts parameters using information available at
+inference, for example to respond to distribution shift
+\citep{sun2020test}. Our controlled feedback experiments include
+supervised batches and teacher pseudo-labels. What each policy knows,
+and when it knows it, is part of the experimental definition. The
+full-model search comparison holds the causal Transformer architecture
+fixed while varying the optimizer and search policy
+\citep{vaswani2017attention}.
+
+\paragraph{Retention and dissipation.}
+Elastic weight consolidation (EWC) penalizes displacement along
+directions estimated to be important to prior tasks
+\citep{kirkpatrick2017ewc}. Our Fisher mass changes how momentum translates
+into displacement. The endpoint brakes act on momentum, and the anchor
+contracts selected weight displacements. Metriplectic and GENERIC
+formulations combine a Poisson bracket with a dissipative bracket that
+annihilates the total energy \citep{morrison1986framework,grmela1997dynamics}.
+We preserve the degeneracy conditions on augmented states and measure
+retention separately. Momentum SGD and AdamW serve as comparisons under
+the stated data, gradient, and checkpoint budgets
+\citep{kingma2015adam,loshchilov2019decoupled}.

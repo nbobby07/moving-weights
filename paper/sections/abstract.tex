@@ -1,0 +1,22 @@
+\begin{abstract}
+When feedback arrives after a test-time update, a reversible optimizer
+can reconstruct an earlier state from the current state and an ordered
+batch tape. We study when that option helps, using pre-specified tests
+and independent replication. In changing-batch neural runs, floating-point
+leapfrog has a precision-dependent replay horizon. On a
+\PthreeParams{}-parameter Transformer, both fixed-point formats recover
+all \PthreeParents{} checked tree parents bit for bit. On the longer tape,
+rounding erases some nonzero kicks and both formats hit range guards.
+With a delayed terminal verifier, rewind improves accuracy over
+terminal-only skip at equal gradient budget, although an exploratory
+early-skip policy closes nearly all of the gap on the same seeds.
+The tested Fisher damping, anisotropic mass, and reservoir-augmented
+anchor all fail their pre-specified retention criteria. At depth
+\PthreeDepth{}, full-model int32 search cuts peak CUDA allocation from
+\PthreeGpuSgdMiB{} to \PthreeIntLowMiB{} MiB compared with GPU-checkpoint
+momentum SGD. Pinned-host SGD reaches the same solve rate and exhausts
+the tree \PthreePinnedSpeedup{} times faster. The case for exact replay
+depends on when the system has enough information to stop an update,
+how much trainable state it would otherwise save, and how quickly it can
+restore that state.
+\end{abstract}

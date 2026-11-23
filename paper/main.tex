@@ -1,0 +1,60 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,tabularx,array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[round,authoryear]{natbib}
+\usepackage{verbatim}
+\usepackage{upquote}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{%
+  pdftitle={When Does Reversible Test-Time Training Pay Off? Bit-Exact Lattice Replay, Precision Horizons, and Checkpointing Tradeoffs},
+  pdfauthor={Noel Bobby}}
+
+\setcounter{topnumber}{3}
+\renewcommand{\topfraction}{0.88}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.75}
+
+\newcommand{\pp}{\text{ percentage points}}
+\newcommand{\DKD}{\textsc{dkd}}
+\newcommand{\BWT}{\mathrm{BWT}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\evidence}[1]{\textsc{#1}}
+\newcommand{\RepoLink}{\url{https://github.com/nbobby07/moving-weights}}
+\newenvironment{commandblock}{\par\noindent\begin{minipage}{\linewidth}\small}{\end{minipage}\par}
+\input{macros_verified}
+
+\title{When Does Reversible Test-Time Training Pay Off?\\
+Bit-Exact Lattice Replay, Precision Horizons,\\
+and Checkpointing Tradeoffs}
+\author{Noel Bobby\\
+  \small\href{mailto:noelbobby01@gmail.com}{\texttt{noelbobby01@gmail.com}}\\
+  \small\RepoLink}
+\date{}
+
+\begin{document}
+\maketitle
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/mechanics}
+\input{sections/protocols}
+\input{sections/adaptation}
+\input{sections/search}
+\input{sections/discussion}
+
+\appendix
+\input{sections/reproducibility}
+
+\bibliographystyle{plainnat}
+\begingroup
+\raggedright
+\bibliography{references}
+\endgroup
+\end{document}

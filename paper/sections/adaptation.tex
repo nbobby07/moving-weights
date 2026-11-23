@@ -1,0 +1,192 @@
+\section{Precision, feedback, and continual adaptation}
+\label{sec:adaptation}
+
+\subsection{Native precision and exact lattice replay}
+
+The Phase~1 experiments met the reversibility and energy criteria.
+After \PoneNeuralSteps{} steps on the neural tape, the absolute
+\(L_2\) reconstruction errors in binary64 were \PoneNeuralQ{}
+for position and \PoneNeuralP{} for momentum. In the double well,
+the physical and shadow energy spans scaled as predicted over
+the tested step sizes. Together, these results establish the
+finite-horizon accuracy of the native implementation.
+
+On the Phase~2 binary32 grid, both backends met the tolerance
+through \PtwoGridLast{} steps and first missed it at
+\PtwoGridFail{}. A separate scan of intervening prefixes
+located the first absolute-error miss at \PtwoDenseCPU{} steps
+on CPU and \PtwoDenseCUDA{} on CUDA, using the tolerance
+\PtwoPrecisionThreshold{}. Neither first miss changed the
+recovered first-task correct count. The int64 lattice state
+returned bit for bit at every registered grid point through
+\PtwoIntegerLast{} steps. This right-censored result comes with
+two changes to the method: the lattice state occupies more
+bytes than the binary32 phase state, and rounding changes the
+forward update. Figure~\ref{fig:precision} shows absolute MLP
+errors and relative Transformer errors in separate panels.
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig1_precision_horizon.pdf}
+  \caption{Measured replay precision on the MLP and Transformer.
+  The panels use different error definitions. Native MLP curves
+  use absolute component error, while Transformer curves use
+  relative phase error. MLP lines show dense prefix measurements and
+  markers show frozen-grid maxima across seeds. Transformer circles and
+  squares identify the two seeds. Dotted guides mark the corresponding
+  tolerances. Dense prefixes localize the MLP's first
+  observed miss. Exact integer prefixes and range rejections
+  identify tested endpoints of the long Transformer lattice runs.}
+  \label{fig:precision}
+\end{figure}
+
+\begin{table}[tbp]
+  \centering\small
+  \caption{Phase~1 numerical and learning results from the
+  confirmatory replication. The retention contrasts use the paired first-task
+  backward-transfer margin.}
+  \label{tab:phaseone}
+  \input{tables/phaseone}
+\end{table}
+
+\subsection{When feedback warrants rewind}
+
+\paragraph{Phase~1.}
+Glide detected \PonePoisonsDetected{}/\PoneSeeds{} poisoned windows
+and raised \PoneCleanAlarms{} clean-window alarm, meeting the
+pre-specified finite-horizon criterion. After \PoneFollowup{}
+clean updates, AdamW under the continue-updating policy showed a
+matched clean-minus-poison gap of \PoneAdamGap{} percentage points.
+Because every poison alarm arrived before the first update, a
+policy with the same signal and known boundaries could have
+preserved its starting state by skipping a flagged window.
+In the tested protocol, Glide committed the updates and rewound
+at the window boundary. The observed accuracy advantage applies to
+the comparison with continued adaptation. A matched pre-update
+skip policy remains untested.
+
+\paragraph{Phase~2 ramped onset (B2a).}
+The delayed audit aggregates label disagreements within each block
+of a stream with simulated annotation errors. A failed receipt authorizes
+replay back to the start of the latest block, so an alarm that
+arrives late can leave earlier corrupted updates outside the
+replayable suffix. Glide recovered the intended origin in
+\PtwoRampRecovered{}/\PtwoSeeds{} dirty windows, and B2a failed
+the pre-specified pass criterion. In
+\PtwoRampDamaged{}/\PtwoSeeds{} dirty windows, the rewind arm had
+lost at least \PtwoDamageThreshold{} percentage points of
+Task~1 accuracy at the alarm relative to the true-origin state.
+The passive AdamW loss monitor signaled early in
+\PtwoRampEarly{}/\PtwoSeeds{} windows. The tested onsets align
+with the audit schedule.
+
+\paragraph{Phase~2 terminal verifier (B2b).}
+The updates use potentially corrupted teacher pseudo-labels, and
+an independent first-task canary supplies one actionable bit at
+the end of each window. Rewind recovered
+\PtwoTerminalRecovered{}/\PtwoSeeds{} dirty origins within the
+pre-specified phase error tolerance \PtwoAlarmTargetTol{}.
+B2b met the pre-specified pass criterion. The Task~1 accuracy
+drop met the same damage criterion at the alarm in
+\PtwoTerminalDamaged{}/\PtwoSeeds{} dirty windows. Clean terminal alarms occurred in
+\PtwoTerminalAdamSkipCleanAlarms{}/\PtwoSeeds{} windows for AdamW-skip
+and \PtwoTerminalAdamContinueCleanAlarms{}/\PtwoSeeds{} for
+AdamW-continue. By the terminal signal, AdamW has already
+committed the \PtwoTerminalUpdates{} updates that an earlier
+skip would have prevented. Compared with
+\emph{terminal-only AdamW-skip}, rewind gained
+\PtwoTerminalAdamImmediate{} percentage points immediately and
+\PtwoTerminalAdamBudget{} points at the common
+\PtwoTerminalBudget{}-gradient budget, which lets non-replay
+policies spend their remaining gradients on clean repair.
+
+\paragraph{Exploratory early-skip control.}
+After examining the held-out outcomes, we tested whether
+disagreement with a majority of the teacher pseudo-labels could
+serve as a pre-update warning for AdamW. The policy froze its
+weights and moments before the flagged update and used its
+remaining gradient credits for clean repair. Monitoring required
+an additional forward pass per batch, and we did not measure its
+wall-time cost. The warning appeared after \PtwoEarlyWarnFirst{}
+to \PtwoEarlyWarnLast{} commits in \PtwoEarlyWarnDirty{}/\PtwoSeeds{}
+dirty windows and \PtwoEarlyWarnClean{}/\PtwoSeeds{} clean windows.
+On the same seeds, early skip and rewind gave
+\PtwoEarlySkipImmediateCorrect{} and \PtwoRewindImmediateCorrect{}
+correct predictions out of \PtwoTerminalTotal{} at window end.
+At equal gradient budget the counts were
+\PtwoEarlySkipBudgetCorrect{} and \PtwoRewindBudgetCorrect{}.
+Although rewind recovered within the pre-specified tolerance,
+its accuracy advantages over early skip were only
+\PtwoEarlyImmediateDelta{} and \PtwoEarlyBudgetDelta{} percentage
+points on these tapes. A confirmatory comparison would require
+fresh test seeds.
+
+\begin{table}[tbp]
+  \centering\small
+  \caption{Phase~2 recovery under the pre-specified policies and
+  the post-hoc early-skip control. Clean alarm counts are reported
+  separately for each policy over \PtwoSeeds{} clean windows per regime.
+  The damage count uses dirty DKD-rewind windows that
+  lost at least \PtwoDamageThreshold{} percentage points of Task~1
+  accuracy at alarm relative to the true-origin state.
+  The terminal-only baseline acts after the full speculative window.}
+  \label{tab:recovery}
+  \input{tables/recovery}
+\end{table}
+
+\subsection{Fisher guidance fell short on retention}
+
+The Phase~1 Fisher brake damps the low-Fisher momentum block.
+Momentum in the high-Fisher block can still move the parameters
+away from the old solution. At a common incoming state, the
+projected brake also removes less kinetic energy than isotropic
+damping when that high-Fisher block carries momentum, so the
+isotropic comparison mixes orientation and strength. The Fisher
+brake's mean Task~1 BWT contrasts against
+momentum SGD and AdamW are \PoneFisherSGDDelta{} and
+\PoneFisherAdamDelta{} percentage points, respectively. Both
+one-sided tests give \(p=\PonePrimaryP{}\) at the registered
+margin. For the Fisher arm, mean first-task accuracy falls from
+\PoneFisherStartPct{}\% to \PoneFisherEndPct{}\%, while mean live
+accuracy is \PoneFisherLivePct{}\%. The isotropic ablation also
+has better observed retention than the projected brake.
+These comparisons are for fixed settings
+under an incoming-batch budget.
+
+Phase~2 Fisher mass slows movement along high-Fisher coordinates
+for a given momentum. The drift still has no anchor to the old
+weights. Fisher mass met the live accuracy criterion and failed
+each primary retention contrast. GENERIC adds that anchor and
+cleared the absolute live accuracy floor, but it fell short
+against tuned AdamW (\PtwoGenericLivePct{}\% versus
+\PtwoAdamLivePct{}\%). Its BWT gain over the matched mass control
+was \PtwoGenericMassDelta{} percentage points, with
+\(p=\PtwoGenericMassP{}>\PtwoCutoff{}\). EWC supplies a conventional
+restoring-force comparator under the same fresh gradient budget.
+The damping arms matched realized energy removal by capping the
+nominal request when a projected arm had insufficient kinetic
+energy. The cap was active on \PtwoCaps{} of \PtwoEnergySteps{} steps,
+precluding inference about orientation at the nominal isotropic
+strength. The high-versus-low BWT contrast also failed its
+superiority criterion. Figure~\ref{fig:retention} shows the paired
+contrasts against the positive test margin. Equivalence remains
+untested.
+
+\begin{table}[tbp]
+  \centering\small
+  \caption{Confirmatory Phase~2 retention contrasts. Positive paired
+  differences favor the named intervention. Sign tests use the
+  pre-specified positive BWT margin and familywise cutoff.}
+  \label{tab:retention}
+  \input{tables/retention}
+\end{table}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_continual_falsification.pdf}
+  \caption{Paired backward-transfer contrasts in both continual
+  phases. Marks show seed differences and their means. The
+  registered tests compare with a positive superiority margin,
+  so a positive mean alone does not pass.}
+  \label{fig:retention}
+\end{figure}
