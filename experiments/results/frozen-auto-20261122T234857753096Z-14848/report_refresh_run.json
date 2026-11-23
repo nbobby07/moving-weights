@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "experiments.phase1_report",
+    "experiments\\results\\frozen-auto-20261122T234857753096Z-14848"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "artifact": "summary.csv"
+}

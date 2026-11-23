@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "eval.verify_physics",
+    "--factory",
+    "mttt.optimizers:make_optimizer",
+    "--expected-root",
+    "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+    "--device",
+    "auto",
+    "--output",
+    "experiments\\results\\frozen-auto-20261122T234703078494Z-40224\\physics.json"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "artifact": "physics.json"
+}

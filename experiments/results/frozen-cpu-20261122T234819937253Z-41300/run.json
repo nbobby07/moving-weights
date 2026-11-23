@@ -1,0 +1,10 @@
+{
+  "device_requested": "cpu",
+  "copy_to_acceptance": false,
+  "checks": {
+    "tests": true,
+    "physics": true,
+    "analytic": true,
+    "continual": true
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "status": "passed",
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "experiments.sweep_baselines",
+    "--device",
+    "cuda"
+  ],
+  "torch": "2.14.0+cu130",
+  "python": "3.11.9",
+  "device": "cuda",
+  "cuda_build": "13.0",
+  "dtype": "float64",
+  "eval_sha256": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+  "deterministic": true,
+  "threads": 1,
+  "source_sha256": {
+    "sweep_baselines.py": "7fc37ceb478db3cf2a128de2b4b6424f61e492df5912b18018fe2ddf88aa8514",
+    "baselines.py": "8eb06ef12e5b81f73c32f9c7829b3d6d1c351d7cb02912b98a38dea9e6276812"
+  },
+  "validation_seeds": [
+    2027,
+    4099,
+    6029
+  ],
+  "heldout_seeds": [
+    1729,
+    2718,
+    3141,
+    4211,
+    5501,
+    6673,
+    7919,
+    8861
+  ],
+  "grid": [
+    {
+      "method": "sgdm",
+      "h": 0.0072,
+      "strength": 0.0
+    },
+    {
+      "method": "sgdm",
+      "h": 0.0144,
+      "strength": 0.0
+    },
+    {
+      "method": "sgdm",
+      "h": 0.0288,
+      "strength": 0.0
+    },
+    {
+      "method": "adamw",
+      "h": 0.005,
+      "strength": 0.0
+    },
+    {
+      "method": "adamw",
+      "h": 0.01,
+      "strength": 0.0
+    },
+    {
+      "method": "adamw",
+      "h": 0.02,
+      "strength": 0.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0072,
+      "strength": 0.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0072,
+      "strength": 10.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0072,
+      "strength": 100.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0072,
+      "strength": 1000.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0144,
+      "strength": 0.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0144,
+      "strength": 10.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0144,
+      "strength": 100.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0144,
+      "strength": 1000.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0288,
+      "strength": 0.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0288,
+      "strength": 10.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0288,
+      "strength": 100.0
+    },
+    {
+      "method": "ewc",
+      "h": 0.0288,
+      "strength": 1000.0
+    }
+  ],
+  "live_tolerance": 0.01,
+  "selection_rule": "Require all validation runs to be finite and mean live accuracy within 1pp of the lower nominal SGDM/AdamW mean. Select max mean Task 1 BWT, breaking ties by mean live accuracy, then grid order. Require positive EWC strength; zero is a matched SGD control.",
+  "hardware": "NVIDIA GeForce RTX 5070",
+  "validation": {
+    "sgdm-h0.0072-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9,
+        "sample_std": 0.005773502691896294
+      },
+      "live_acc": {
+        "mean": 0.981388888888889,
+        "sample_std": 0.0020971762320196423
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.11000000000000003,
+        "sample_std": 0.003004626062886631
+      },
+      "ms_per_step": {
+        "mean": 0.534062499759279,
+        "sample_std": 0.014960565680430511
+      }
+    },
+    "sgdm-h0.0144-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9377777777777778,
+        "sample_std": 0.0038490017945974338
+      },
+      "live_acc": {
+        "mean": 0.9866666666666667,
+        "sample_std": 0.0025000000000000022
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.07111111111111111,
+        "sample_std": 0.006254627916220951
+      },
+      "ms_per_step": {
+        "mean": 0.5863454858222718,
+        "sample_std": 0.050405044534126836
+      }
+    },
+    "sgdm-h0.0288-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9744444444444444,
+        "sample_std": 0.010183501544346206
+      },
+      "live_acc": {
+        "mean": 0.9866666666666667,
+        "sample_std": 0.0030046260628866658
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.05083333333333334,
+        "sample_std": 0.002500000000000016
+      },
+      "ms_per_step": {
+        "mean": 0.5653984385895051,
+        "sample_std": 0.014295049456835445
+      }
+    },
+    "adamw-h0.005-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9700000000000001,
+        "sample_std": 0.014529663145135494
+      },
+      "live_acc": {
+        "mean": 0.9869444444444445,
+        "sample_std": 0.003154949081000161
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.054444444444444434,
+        "sample_std": 0.004194352464039321
+      },
+      "ms_per_step": {
+        "mean": 0.7247619788459916,
+        "sample_std": 0.18179240064494703
+      }
+    },
+    "adamw-h0.01-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9788888888888889,
+        "sample_std": 0.012619796324000543
+      },
+      "live_acc": {
+        "mean": 0.9844444444444446,
+        "sample_std": 0.003367876570272785
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.04416666666666667,
+        "sample_std": 0.004330127018922189
+      },
+      "ms_per_step": {
+        "mean": 0.6034661461550664,
+        "sample_std": 0.011057946968886347
+      }
+    },
+    "adamw-h0.02-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9677777777777778,
+        "sample_std": 0.020092379244472325
+      },
+      "live_acc": {
+        "mean": 0.9830555555555556,
+        "sample_std": 0.002405626121623432
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.05333333333333335,
+        "sample_std": 0.00381881307912987
+      },
+      "ms_per_step": {
+        "mean": 0.5833041658560332,
+        "sample_std": 0.005598502229711213
+      }
+    },
+    "ewc-h0.0072-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9,
+        "sample_std": 0.005773502691896294
+      },
+      "live_acc": {
+        "mean": 0.981388888888889,
+        "sample_std": 0.0020971762320196423
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.11000000000000003,
+        "sample_std": 0.003004626062886631
+      },
+      "ms_per_step": {
+        "mean": 0.590240278850413,
+        "sample_std": 0.02712225339910521
+      }
+    },
+    "ewc-h0.0072-lambda10": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.87,
+        "sample_std": 0.026666666666666727
+      },
+      "live_acc": {
+        "mean": 0.9777777777777779,
+        "sample_std": 0.003849001794597498
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.11833333333333333,
+        "sample_std": 0.009166666666666629
+      },
+      "ms_per_step": {
+        "mean": 0.5612368052728319,
+        "sample_std": 0.002213838917499413
+      }
+    },
+    "ewc-h0.0072-lambda100": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.6111111111111112,
+        "sample_std": 0.14260798377733644
+      },
+      "live_acc": {
+        "mean": 0.9305555555555556,
+        "sample_std": 0.02582437120528101
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.18527777777777776,
+        "sample_std": 0.039231624620583445
+      },
+      "ms_per_step": {
+        "mean": 0.562717707402448,
+        "sample_std": 0.0023552607588774913
+      }
+    },
+    "ewc-h0.0072-lambda1000": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.07666666666666666,
+        "sample_std": 0.08888194417315588
+      },
+      "live_acc": {
+        "mean": 0.6530555555555556,
+        "sample_std": 0.10923449970556885
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.11305555555555558,
+        "sample_std": 0.06481455026401034
+      },
+      "ms_per_step": {
+        "mean": 0.5623819439885361,
+        "sample_std": 0.008952646523836342
+      }
+    },
+    "ewc-h0.0144-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9377777777777778,
+        "sample_std": 0.0038490017945974338
+      },
+      "live_acc": {
+        "mean": 0.9866666666666667,
+        "sample_std": 0.0025000000000000022
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.07111111111111111,
+        "sample_std": 0.006254627916220951
+      },
+      "ms_per_step": {
+        "mean": 0.5970456596615905,
+        "sample_std": 0.012193530847150379
+      }
+    },
+    "ewc-h0.0144-lambda10": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9155555555555556,
+        "sample_std": 0.01835856849095371
+      },
+      "live_acc": {
+        "mean": 0.9836111111111111,
+        "sample_std": 0.0020971762320196423
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.08694444444444442,
+        "sample_std": 0.010747523401196179
+      },
+      "ms_per_step": {
+        "mean": 0.56793489663202,
+        "sample_std": 0.014656954514799673
+      }
+    },
+    "ewc-h0.0144-lambda100": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.6555555555555556,
+        "sample_std": 0.14833645439912507
+      },
+      "live_acc": {
+        "mean": 0.9363888888888889,
+        "sample_std": 0.025445111587566332
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.18888888888888888,
+        "sample_std": 0.0486935808378765
+      },
+      "ms_per_step": {
+        "mean": 0.5868135411017446,
+        "sample_std": 0.0052915441801221685
+      }
+    },
+    "ewc-h0.0144-lambda1000": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.11222222222222222,
+        "sample_std": 0.12157911614040257
+      },
+      "live_acc": {
+        "mean": 0.6708333333333334,
+        "sample_std": 0.12816276543694133
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.12305555555555556,
+        "sample_std": 0.07192942786226367
+      },
+      "ms_per_step": {
+        "mean": 0.5684546884165482,
+        "sample_std": 0.016268853377607344
+      }
+    },
+    "ewc-h0.0288-lambda0": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9744444444444444,
+        "sample_std": 0.010183501544346206
+      },
+      "live_acc": {
+        "mean": 0.9866666666666667,
+        "sample_std": 0.0030046260628866658
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.05083333333333334,
+        "sample_std": 0.002500000000000016
+      },
+      "ms_per_step": {
+        "mean": 0.5794336822065007,
+        "sample_std": 0.020243858762092438
+      }
+    },
+    "ewc-h0.0288-lambda10": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9400000000000001,
+        "sample_std": 0.010000000000000064
+      },
+      "live_acc": {
+        "mean": 0.9847222222222223,
+        "sample_std": 0.0020971762320196497
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.07388888888888888,
+        "sample_std": 0.013471506281091275
+      },
+      "ms_per_step": {
+        "mean": 0.5923364577837573,
+        "sample_std": 0.03200447477209808
+      }
+    },
+    "ewc-h0.0288-lambda100": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.7488888888888889,
+        "sample_std": 0.11814930917808736
+      },
+      "live_acc": {
+        "mean": 0.9508333333333334,
+        "sample_std": 0.018763883748662828
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.18694444444444447,
+        "sample_std": 0.04646035745466036
+      },
+      "ms_per_step": {
+        "mean": 0.5825602426436186,
+        "sample_std": 0.01971420635714946
+      }
+    },
+    "ewc-h0.0288-lambda1000": {
+      "passed": 3,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.1177777777777778,
+        "sample_std": 0.1275989086218275
+      },
+      "live_acc": {
+        "mean": 0.6777777777777778,
+        "sample_std": 0.12679361328698843
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.12583333333333335,
+        "sample_std": 0.0682112730989371
+      },
+      "ms_per_step": {
+        "mean": 0.5630161455580188,
+        "sample_std": 0.00736438760295639
+      }
+    }
+  },
+  "live_floor": 0.9744444444444446,
+  "selected": {
+    "sgdm": {
+      "method": "sgdm",
+      "h": 0.0072,
+      "strength": 0.0
+    },
+    "adamw": {
+      "method": "adamw",
+      "h": 0.02,
+      "strength": 0.0
+    },
+    "ewc": {
+      "method": "ewc",
+      "h": 0.0072,
+      "strength": 10.0
+    }
+  },
+  "heldout": {
+    "sgdm-h0.0144-lambda0": {
+      "passed": 8,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9325000000000001,
+        "sample_std": 0.014337208778404381
+      },
+      "live_acc": {
+        "mean": 0.9888541666666667,
+        "sample_std": 0.0017215660552356846
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.05791666666666667,
+        "sample_std": 0.01372924118413191
+      },
+      "ms_per_step": {
+        "mean": 0.5707414707103453,
+        "sample_std": 0.05409408498117634
+      }
+    },
+    "adamw-h0.01-lambda0": {
+      "passed": 8,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9566666666666668,
+        "sample_std": 0.011268723396380232
+      },
+      "live_acc": {
+        "mean": 0.9888541666666667,
+        "sample_std": 0.003448530282759767
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.03927083333333333,
+        "sample_std": 0.011997333533113172
+      },
+      "ms_per_step": {
+        "mean": 0.6325815753977319,
+        "sample_std": 0.028891864312211406
+      }
+    },
+    "sgdm-h0.0072-lambda0": {
+      "passed": 8,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.8841666666666667,
+        "sample_std": 0.025681195640464456
+      },
+      "live_acc": {
+        "mean": 0.9836458333333333,
+        "sample_std": 0.002918791742844164
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.0934375,
+        "sample_std": 0.013217033712551767
+      },
+      "ms_per_step": {
+        "mean": 0.5476492177270605,
+        "sample_std": 0.017582473851134265
+      }
+    },
+    "adamw-h0.02-lambda0": {
+      "passed": 8,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.9570833333333334,
+        "sample_std": 0.019955307206712836
+      },
+      "live_acc": {
+        "mean": 0.9872916666666667,
+        "sample_std": 0.0036933552517829835
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.05072916666666667,
+        "sample_std": 0.013997147526867353
+      },
+      "ms_per_step": {
+        "mean": 0.6469744140910431,
+        "sample_std": 0.07861537021207159
+      }
+    },
+    "ewc-h0.0072-lambda10": {
+      "passed": 8,
+      "failed": 0,
+      "task1_bwt": {
+        "mean": -0.8691666666666668,
+        "sample_std": 0.027645717829090914
+      },
+      "live_acc": {
+        "mean": 0.9820833333333334,
+        "sample_std": 0.0032120803721981156
+      },
+      "arrival_to_live_gain": {
+        "mean": 0.1,
+        "sample_std": 0.013837205424805042
+      },
+      "ms_per_step": {
+        "mean": 0.6056269533019076,
+        "sample_std": 0.057054208304773917
+      }
+    }
+  }
+}

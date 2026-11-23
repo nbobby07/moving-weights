@@ -1,0 +1,10 @@
+{
+  "eval_sha256": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+  "checks": {
+    "single_byte_append_rejected": true,
+    "file_removal_rejected": true,
+    "empty_extra_file_rejected": true,
+    "all_non_timing_values_repeat_cpu": true,
+    "all_non_timing_values_repeat_cuda": true
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "benchmark": "physics",
+  "eval_sha256": "a2c2f60d9fe7508f0f5c62701016d488b365d8d68710e72bac41cec7ebdcc89d",
+  "factory": "eval.reference:make_optimizer",
+  "factory_module_sha256": "2e1ef898f7bd757ac6c47642c63d0a02029453b5a2f46ec9aaaa02ffafa7150b",
+  "torch": "2.14.0+cu130",
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "device": "cuda",
+  "hardware": "NVIDIA GeForce RTX 5070",
+  "cuda_build": "13.0",
+  "deterministic": true,
+  "threads": 1,
+  "probes": [
+    {
+      "method": "glide",
+      "fisher": [
+        0.1,
+        0.4,
+        4.0
+      ],
+      "reported_brake": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min_brake_eigenvalue": 1.0,
+      "mask_l2": 0.0,
+      "brake_map_l2": 0.0,
+      "split_step_l2": 0.0,
+      "gradient_sites_ok": true,
+      "pure": true,
+      "roundtrip_l2": 6.206335383118183e-17,
+      "wrong_batch_order_q_l2": 0.10709115231844284,
+      "symplectic_form_residual": 2.4352406481562766e-11,
+      "passed": true
+    },
+    {
+      "method": "strang",
+      "fisher": [
+        0.1,
+        0.4,
+        4.0
+      ],
+      "reported_brake": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min_brake_eigenvalue": 1.0,
+      "mask_l2": 0.0,
+      "brake_map_l2": 5.768888059150692e-16,
+      "split_step_l2": 4.335559509131367e-16,
+      "gradient_sites_ok": true,
+      "pure": true,
+      "roundtrip_l2": 6.206335383118183e-17,
+      "wrong_batch_order_q_l2": 0.10709115231844284,
+      "symplectic_form_residual": 2.4352406481562766e-11,
+      "passed": true
+    },
+    {
+      "method": "fisher",
+      "fisher": [
+        0.1,
+        0.4,
+        4.0
+      ],
+      "reported_brake": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "min_brake_eigenvalue": 0.0,
+      "mask_l2": 0.0,
+      "brake_map_l2": 6.473657049138938e-16,
+      "split_step_l2": 4.335559509131367e-16,
+      "gradient_sites_ok": true,
+      "pure": true,
+      "roundtrip_l2": 6.206335383118183e-17,
+      "wrong_batch_order_q_l2": 0.10709115231844284,
+      "symplectic_form_residual": 2.4352406481562766e-11,
+      "passed": true
+    },
+    {
+      "method": "fisher",
+      "fisher": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "reported_brake": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min_brake_eigenvalue": 1.0,
+      "mask_l2": 0.0,
+      "brake_map_l2": 5.768888059150692e-16,
+      "split_step_l2": 4.335559509131367e-16,
+      "gradient_sites_ok": true,
+      "pure": true,
+      "roundtrip_l2": 6.206335383118183e-17,
+      "wrong_batch_order_q_l2": 0.10709115231844284,
+      "symplectic_form_residual": 2.4352406481562766e-11,
+      "passed": true
+    },
+    {
+      "method": "fisher",
+      "fisher": [
+        3.0,
+        1.0,
+        1.0
+      ],
+      "reported_brake": [
+        0.0,
+        1.0,
+        1.0
+      ],
+      "min_brake_eigenvalue": 0.0,
+      "mask_l2": 0.0,
+      "brake_map_l2": 6.473657049138938e-16,
+      "split_step_l2": 4.577566798522237e-16,
+      "gradient_sites_ok": true,
+      "pure": true,
+      "roundtrip_l2": 6.206335383118183e-17,
+      "wrong_batch_order_q_l2": 0.10709115231844284,
+      "symplectic_form_residual": 2.4352406481562766e-11,
+      "passed": true
+    },
+    {
+      "method": "sgdm",
+      "native_torch_q_l2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.3877787807814457e-17,
+        1.3877787807814457e-17
+      ],
+      "gradient_calls": 7,
+      "passed": true
+    },
+    {
+      "method": "adamw",
+      "native_torch_q_l2": [
+        2.7755575615628914e-17,
+        7.850462293418876e-17,
+        1.0007415106216802e-16,
+        1.0007415106216802e-16,
+        1.0007415106216802e-16,
+        1.0007415106216802e-16,
+        1.1188630228279524e-16
+      ],
+      "gradient_calls": 7,
+      "passed": true
+    }
+  ],
+  "checks_passed": true
+}

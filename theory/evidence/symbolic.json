@@ -1,0 +1,15 @@
+{
+  "sympy": "1.14.0",
+  "exact_identities": {
+    "inverse_positions_and_momenta": true,
+    "canonical_form": true,
+    "isotropic_half_brake_form": true,
+    "bath_PSD_factorization": true,
+    "bath_energy_degeneracy": true,
+    "bath_entropy_production": true,
+    "high_subspace_bracket_null": true,
+    "high_direction_glide_counterexample": true,
+    "double_well_gradient": true,
+    "BCH_shadow_coefficient": true
+  }
+}

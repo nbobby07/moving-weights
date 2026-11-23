@@ -1,0 +1,18 @@
+{
+  "device_requested": "auto",
+  "copy_to_acceptance": true,
+  "acceptance_published": true,
+  "source_sha256": {
+    "src/mttt/__init__.py": "2b35523f911f6a019ffcc35f3a4f8fd6d488a37ad852e0f1d81c463fd30b0877",
+    "src/mttt/baselines.py": "8eb06ef12e5b81f73c32f9c7829b3d6d1c351d7cb02912b98a38dea9e6276812",
+    "src/mttt/optimizers.py": "4eb7d1dca313792392b32884b333c331870d0b96cfe3295f9e7cfa2caa789a68",
+    "src/mttt/phase.py": "9080a865e4b7d406005426bdb6d922416216cc8b710e54c746f3a742d5ba47b0"
+  },
+  "checks": {
+    "tests": true,
+    "physics": true,
+    "analytic": true,
+    "continual": true,
+    "report": true
+  }
+}

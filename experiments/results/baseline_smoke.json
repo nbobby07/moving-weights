@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "command": "PYTHONPATH=src python -B - (inline baseline unit smoke check)",
+  "devices": ["cpu", "cuda"],
+  "dtypes": ["float32", "float64"],
+  "native_comparison": {
+    "methods": ["sgdm", "adamw"],
+    "learning_rate": 0.017,
+    "steps_per_device_dtype_method": 7,
+    "weight_comparison_at_every_step": "torch.equal passed",
+    "fresh_adapter_between_steps": true,
+    "detached_outputs": true
+  },
+  "ewc": {
+    "expected_and_observed_q": [2.0, 1.0, 0.0],
+    "expected_and_observed_velocity": [0.0, 2.0, 4.0],
+    "constructor_source_tensors_mutated_before_step": true,
+    "detached_outputs": true
+  },
+  "exit_code": 0,
+  "stdout": "Native parity and EWC self-checks passed on CPU and CUDA for float32 and float64"
+}

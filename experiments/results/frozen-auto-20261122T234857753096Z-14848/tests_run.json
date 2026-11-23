@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Users\\Noel\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights",
+  "pythonpath": "C:\\Users\\Noel\\Documents\\ChatGPT\\moving-weights\\src",
+  "status": "passed",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_brake_geometry (test_optimizers.OptimizerTests.test_brake_geometry) ... ok\ntest_ewc_penalty_and_frozen_coefficients (test_optimizers.OptimizerTests.test_ewc_penalty_and_frozen_coefficients) ... ok\ntest_fresh_baselines_match_native (test_optimizers.OptimizerTests.test_fresh_baselines_match_native) ... ok\ntest_ordered_checkpoint_free_rollback (test_optimizers.OptimizerTests.test_ordered_checkpoint_free_rollback) ... ok\ntest_quadratic_stability_boundary (test_optimizers.OptimizerTests.test_quadratic_stability_boundary) ... ok\ntest_split_force_sites_and_immutability (test_optimizers.OptimizerTests.test_split_force_sites_and_immutability) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 3.430s\n\nOK\n",
+  "artifact": null
+}

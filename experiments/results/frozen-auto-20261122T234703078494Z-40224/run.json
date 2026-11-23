@@ -1,0 +1,9 @@
+{
+  "device_requested": "auto",
+  "copy_to_acceptance": true,
+  "checks": {
+    "physics": true,
+    "analytic": true,
+    "continual": true
+  }
+}
