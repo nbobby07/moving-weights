@@ -1,0 +1,17 @@
+{
+  "sympy": "1.14.0",
+  "exact_identities": {
+    "mass_DKD_symplectic": true,
+    "same_reverse_midpoint": true,
+    "reflected_inverse": true,
+    "poisson_antisymmetric": true,
+    "poisson_Jacobi": true,
+    "entropy_Casimir": true,
+    "metric_energy_degeneracy": true,
+    "mechanical_projection": true,
+    "anchor_velocity": true,
+    "entropy_production": true,
+    "matched_remove_low": true,
+    "matched_remove_high": true
+  }
+}
